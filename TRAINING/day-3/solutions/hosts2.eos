@@ -1,0 +1,11 @@
+router bgp 4545
+   vrf vlan100
+      router-id 46.46.46.46
+      neighbor 100.100.100.3 remote-as 5454
+      neighbor 100.100.100.3 allowas-in 3
+      neighbor 100.100.100.3 ebgp-multihop 4
+      neighbor 100.100.100.4 remote-as 5454
+      neighbor 100.100.100.4 allowas-in 3
+      neighbor 100.100.100.4 ebgp-multihop 4
+      redistribute connected
+!

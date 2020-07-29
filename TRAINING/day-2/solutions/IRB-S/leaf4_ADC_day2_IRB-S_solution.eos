@@ -1,0 +1,46 @@
+conf t
+vrf instance tenant-blue
+!
+vlan 50,55,60
+!
+interface vxlan 1
+   vxlan vlan 50 vni 50
+   vxlan vlan 55 vni 55
+   vxlan vlan 60 vni 60
+   vxlan vrf tenant-blue vni 12345
+   !
+interface Vlan50
+   vrf tenant-blue
+   ip address virtual 10.0.50.254/24
+   !
+interface Vlan55
+   vrf tenant-blue
+   ip address virtual 10.0.55.254/24
+   !
+interface Vlan60
+   vrf tenant-blue
+   ip address virtual 10.0.60.254/24
+   !
+interface Vlan1515
+   vrf tenant-blue
+   ip address 223.255.255.4/24
+!
+router bgp 65002
+    vlan 50
+        rd 123.1.1.6:50
+        route-target both 50:50
+        redistribute learned
+    vlan 55
+        rd 123.1.1.6:55
+        route-target both 55:55
+        redistribute learned
+    vlan 60
+       rd 123.1.1.6:60
+       route-target both 60:60
+       redistribute learned
+    vrf tenant-blue
+       rd 123.1.1.6:12345
+       route-target both 12345:12345
+       redistribute connected
+!
+ip routing vrf tenant-blue
