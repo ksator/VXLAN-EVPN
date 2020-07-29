@@ -64,7 +64,7 @@
    1. Enable interface `vxlan 1` and set the source interface to loopback 1
 6. Configure eBGP - EVPN for iverlay
    1. Schema
-   ![eBGP-overlay.png](eBGP-Overlay.png)
+   ![eBGP-overlay.png](eBGP-overlay.png)
    2. Use peer group to complete config
       1. Disable maximum-routes
       2. Set the update-source
