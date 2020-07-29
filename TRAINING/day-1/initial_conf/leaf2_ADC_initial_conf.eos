@@ -1,0 +1,57 @@
+hostname leaf2
+!
+vlan 4094
+   trunk group mlag-peer
+!
+interface Port-Channel100
+   description mlag
+   switchport mode trunk
+   switchport trunk group mlag-peer
+!
+interface Ethernet1
+   description mlag
+   channel-group 100 mode active
+!
+interface Ethernet2
+   description spine1
+   mtu 9100
+   no switchport
+   ip address 10.0.0.3/31
+!
+interface Ethernet3
+   description spine2
+   mtu 9100
+   no switchport
+   ip address 10.0.0.11/31
+!
+interface Ethernet4
+   description host1
+   channel-group 1 mode active
+!
+interface Ethernet5
+   description host1-l3vpn
+   shutdown
+!
+interface Port-Channel1
+   description host1
+   switchport mode trunk
+   mlag 1
+!
+interface Loopback0
+   description bgp-evpn
+   ip address 123.1.1.4/32
+!
+interface Loopback1
+   description vxlan
+   ip address 1.1.1.1/32
+!
+interface Vlan4094
+   ip address 172.16.1.1/31
+!
+ip routing
+!
+mlag configuration
+   domain-id mlag
+   local-interface Vlan4094
+   peer-address 172.16.1.0
+   peer-link Port-Channel100

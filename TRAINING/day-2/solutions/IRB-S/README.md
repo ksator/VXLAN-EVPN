@@ -1,3 +1,3 @@
 # Directory for day-2 solutions
 
-- L2VPN
+- Symetric IRB

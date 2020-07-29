@@ -1,0 +1,30 @@
+hostname spine2
+!
+interface Ethernet2
+   description leaf1
+   mtu 9100
+   no switchport
+   ip address 10.0.0.8/31
+!
+interface Ethernet3
+   description leaf2
+   mtu 9100
+   no switchport
+   ip address 10.0.0.10/31
+!
+interface Ethernet4
+   description leaf3
+   mtu 9100
+   no switchport
+   ip address 10.0.0.12/31
+!
+interface Ethernet5
+   description leaf4
+   mtu 9100
+   no switchport
+   ip address 10.0.0.14/31
+!
+interface Loopback0
+   ip address 123.1.1.2/32
+!
+ip routing
