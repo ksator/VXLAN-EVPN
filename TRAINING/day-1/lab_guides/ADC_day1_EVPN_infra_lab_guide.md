@@ -12,9 +12,9 @@
   * The goal is not to finish absolutely but more for understanding
   * Lab will be available
 * **Save on each box the initial-configurations for later-purposes**
-  * `copy running-configuration flash:init_conf_ADC.eos`
+  * `copy running-config flash:init_conf_ADC.eos`
 * Don’t forget to save your running-configuration frequently.
-  * `copy running-configuration startup-configuration`
+  * `copy running-config startup-configuration`
   * `wr`
 * If you don’t finish the lab :
   * don’t worry about it
@@ -22,8 +22,9 @@
 
 ## ADC initial configurations
 
-* Use this if you are going to start from here.
+* Use this if you are going to start from here : [Initial configurations](https://github.com/krikoon73/VXLAN-EVPN/tree/master/TRAINING/day-1/initial_conf)
 * Copy all these configurations to the boxes.
+* Save the configuration : **`copy running-config flash:init_IP_connectivity.eos`** 
 
 ## EVPN Configuration steps
 
@@ -77,31 +78,87 @@
    8. Don’t forget that EVPN require ArBGP enable
 7. Verify if the EVPN sessions are up
 
-## Usefull example
+## Usefull examples (try to not cut-and-paste)
 
-* Interface vxlan
+* Interface vxlan example
 
 ``` interface Vxlan1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
 ```
 
-* BGP
+* Access list example on vtep1
 
-``` router bgp 65000
-   router-id 123.1.1.2
+```
+ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+ip prefix-list loopback seq 20 permit 1.1.1.1/32
+```
+
+* BGP snippet for leaf1
+
+``` 
+router bgp 65001
+   router-id 123.1.1.3
+   no bgp default ipv4-unicast
+   maximum-paths 2 ecmp 2
+   neighbor overlay-leaf-sessions peer group
+   neighbor overlay-leaf-sessions remote-as 65000
+   neighbor overlay-leaf-sessions update-source Loopback0
+   neighbor overlay-leaf-sessions ebgp-multihop 2
+   neighbor overlay-leaf-sessions send-community extended
+   neighbor overlay-leaf-sessions maximum-routes 0
+   neighbor underlay-leaf-sessions peer group
+   neighbor underlay-leaf-sessions remote-as 65000
+   neighbor underlay-leaf-sessions maximum-routes 12000
+   neighbor mlag-ipv4-underlay-peer peer group
+   neighbor mlag-ipv4-underlay-peer remote-as 65001
+   neighbor mlag-ipv4-underlay-peer next-hop-self
+   neighbor mlag-ipv4-underlay-peer send-community
+   neighbor 10.0.0.0 peer group underlay-leaf-sessions
+   neighbor 10.0.0.8 peer group underlay-leaf-sessions
+   neighbor 123.1.1.1 peer group overlay-leaf-sessions
+   neighbor 123.1.1.2 peer group overlay-leaf-sessions
+   neighbor 172.16.1.1 peer group mlag-ipv4-underlay-peer
+   redistribute connected route-map loopback
+   !
+   address-family evpn
+      neighbor overlay-leaf-sessions activate
+   !
+   address-family ipv4
+      neighbor underlay-leaf-sessions activate
+      neighbor 172.16.1.1 activate
+!
+```
+
+* Access list example on spine1
+
+```
+ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+```
+
+* Peer filter example on spine1
+
+```
+peer-filter leaf-range
+   10 match as-range 65001-65004 result accept
+```
+
+* BGP snippet for spine1
+
+``` 
+router bgp 65000
+   router-id 123.1.1.1
    no bgp default ipv4-unicast
    maximum-paths 2 ecmp 2
    bgp listen range 123.0.0.0/8 peer-group overlay-leaf-sessions peer-filter leaf-range
    bgp listen range 10.0.0.0/8 peer-group underlay-leaf-sessions peer-filter leaf-range
    neighbor overlay-leaf-sessions peer group
    neighbor overlay-leaf-sessions update-source Loopback0
-   neighbor overlay-leaf-sessions ebgp-multihop 3
+   neighbor overlay-leaf-sessions ebgp-multihop 2
    neighbor overlay-leaf-sessions send-community extended
    neighbor overlay-leaf-sessions maximum-routes 0
    neighbor underlay-leaf-sessions peer group
    neighbor underlay-leaf-sessions maximum-routes 12000
-   neighbor underlay-leaf-sessions send-community
    redistribute connected route-map loopback
    !
    address-family evpn
@@ -112,10 +169,10 @@
       neighbor underlay-leaf-sessions activate
 ```
 
-* Access list
+* ArBGP Activation
 
-```ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
-ip prefix-list loopback seq 20 permit 1.1.1.1/32
+```
+service routing protocols model multi-agent
 ```
 
 ## Ip adressing scheme
