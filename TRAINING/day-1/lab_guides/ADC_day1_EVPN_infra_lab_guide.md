@@ -100,7 +100,6 @@ ip prefix-list loopback seq 20 permit 1.1.1.1/32
 
 route-map loopback permit 10
    match ip address prefix-list loopback
-
 ```
 
 * BGP snippet for leaf1
