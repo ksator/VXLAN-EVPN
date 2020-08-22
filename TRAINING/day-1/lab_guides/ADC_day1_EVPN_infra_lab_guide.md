@@ -6,11 +6,15 @@
 
 ## Notes about this lab
 
+* This lab will help to understand how to build an EVPN-VXLAN infrastructure in the following context
+  * eBGP underlay
+  * eBGP overlay
+  * note : it is easy to translate it to an IGP underlay model by configuring RR on the spines for the ooverlay session
 * This is not a “push-command” lab (except for IP addresses config. Or some basic stuff)
   * Try the commands
   * It could have some basic missing and traps
   * The goal is not to finish absolutely but more for understanding
-  * Lab will be available
+  * Lab will be available after the training
 * **Save on each box the initial-configurations for later-purposes**
   * `copy running-config flash:init_conf_ADC.eos`
 * Don’t forget to save your running-configuration frequently.
@@ -41,13 +45,14 @@
       7. Activate IPv4 session on peer group (address-family)
    2. On leafs
       1. Configure ecmp : max paths 2, ecmp 2
-      2. Configure a peer-filter leaf-range : name => spine-range
-      3. Configure a peer group to make the config : name => underlay-spine-sessions
-      4. Associate neighbor to peer group
-      5. Use “bgp listen range”
-      6. Disable default IPv4 unicast address-family in global BGP configuration
-      7. Activate IPv4 session on peer group (address-family)
-   3. Check BGP session between Spine and Leaf
+      2. Configure a peer group to make the config : name => underlay-leaf-sessions
+      3. Associate neighbor to peer group
+      4. Disable default IPv4 unicast address-family in global BGP configuration
+      5. Activate IPv4 session on peer group (address-family)
+   3. Check BGP session between Spine and Leaf : 
+      1. `show ip bgp summary`
+      2. `show ip bgp neighbor w.x.y.z received-routes`
+      3. `show ip bgp neighbor w.x.y.z advertised-routes`
 3. Configure iBGP over the peer link (leaf only)
    1. Use a peer group : mlag-ipv4-underlay-peer
    2. Associate the mlag-peer to the peer-group
@@ -60,31 +65,31 @@
       2. In the BGP conf. : redistribute connected route-map loopback
    2. Verify if the IPv4 underlay sessions are up and loopback are reachable
       1. `show ip route`
-      2. `ping`
+      2. `ping` ...
 5. Configure VXLAN
    1. Enable interface `vxlan 1` and set the source interface to loopback 1
 6. Configure eBGP - EVPN for overlay
    1. Schema
 ![eBGP-overlay.png](eBGP-overlay.png)
-   2. Use peer group to complete config
+   2. Use peer group to complete config (name : overlay-leaf-session)
       1. Disable maximum-routes
       2. Set the update-source
       3. Peer using the loopback0 interface
    3. On Spine switches use bgp listen range
    4. Don’t forget the EVPN bgp session are “multi-hop”
-   5. Don’t forget the community
-   6. Don’t forget that the spines in a route-server
-   7. Don’t forget to activate the right address-familly
-   8. Don’t forget that EVPN require ArBGP enable
-7. Verify if the EVPN sessions are up
+   5. Don’t forget to send the extended community
+   6. Don’t forget that the spines is a route-server in case of EVPN
+   7. Don’t forget to activate the EVPN neighbord in the right address-familly
+   8. Don’t forget that EVPN require ArBGP enable (of course)
+7. Verify if the EVPN sessions are up : `show bgp evpn summary`
 
 ## Usefull examples (try to not cut-and-paste)
 
 * Interface vxlan example
 
-``` interface Vxlan1
+``` 
+interface Vxlan1
    vxlan source-interface Loopback1
-   vxlan udp-port 4789
 ```
 
 * Access list example on vtep1
@@ -92,6 +97,10 @@
 ```
 ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
 ip prefix-list loopback seq 20 permit 1.1.1.1/32
+
+route-map loopback permit 10
+   match ip address prefix-list loopback
+
 ```
 
 * BGP snippet for leaf1
@@ -134,6 +143,10 @@ router bgp 65001
 
 ```
 ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+
+route-map loopback permit 10
+   match ip address prefix-list loopback
+
 ```
 
 * Peer filter example on spine1
