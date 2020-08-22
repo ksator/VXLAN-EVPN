@@ -104,6 +104,11 @@
        5. Verify reachability from all subnets on each host, if it works :)
           1. ping vrf vlan100
 
+## Lab conventions
+
+- Contain services, addressing scheme and conventions
+- Located [here](lab-conventions.md)
+
 ## Ip adressing scheme
 
 <table>

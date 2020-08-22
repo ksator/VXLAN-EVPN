@@ -18,8 +18,8 @@
 * Don’t forget to save your running-configuration frequently.
   * `copy running-configuration startup-configuration`
   * or `wr`
-* If you don’t finish the lab : 
-  * don’t worry about it 
+* If you don’t finish the lab :
+  * don’t worry about it
   * You’ll have the lab to practice later on
 
 ## ADC initial configurations
@@ -47,6 +47,13 @@
 * Test reachability from Host1 to Host2 and vice versa
 * Test failover by disabling uplink of a leaf pair to Spine
 * Make sure there is no packet loss
+
+
+## Lab conventions
+
+- Contain services, addressing scheme and conventions
+- Located [here](lab-conventions.md)
+
 
 ## Usefull examples (try to not cut-and-paste)
 

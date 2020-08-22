@@ -187,6 +187,11 @@ router bgp 65000
 service routing protocols model multi-agent
 ```
 
+## Lab conventions
+
+- Contain services, addressing scheme and conventions
+- Located [here](lab-conventions.md)
+
 ## Ip adressing scheme
 
 <table>
