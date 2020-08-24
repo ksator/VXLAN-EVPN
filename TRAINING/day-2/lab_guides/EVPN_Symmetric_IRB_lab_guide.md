@@ -48,4 +48,48 @@ Configure additional Lo223 locally
 ## Examples (do not copy and paste): 
 
 
+- VLANs
+```
+vlan 40, 60
+```
+- VLAN-to-VNI mappings  
+```
+interface vxlan 1
+   vxlan vlan 60 vni 60
+```
+- MAC VRF
+```
+router bgp 65001
+    vlan 60
+        rd 123.1.1.3:60
+        route-target both 60:60
+        redistribute learned
+```
+- VRF 
+```
+vrf instance tenant-blue
+!
+ip routing vrf tenant-blue
+```
+- VRF-to-VNI mappings  
+```
+interface vxlan 1
+   vxlan vrf tenant-blue vni 12345
+```
+- IRB configuration 
+```
+ip virtual-router mac-address aaaa.bbbb.cccc
+!
+interface Vlan60
+   vrf tenant-blue
+   ip address virtual 10.0.60.254/24
+```
+- VRF configuration 
+```
+router bgp 65001
+    vrf tenant-blue
+       rd 123.1.1.3:12345
+       route-target both 12345:12345
+       redistribute connected
+```
 
