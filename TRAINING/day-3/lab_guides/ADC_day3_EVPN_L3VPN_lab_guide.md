@@ -18,9 +18,14 @@
 * Don’t forget to save your running-configuration frequently.
   * `copy running-configuration startup-configuration`
   * or `wr`
-* If you don’t finish the lab : 
-  * don’t worry about it 
+* If you don’t finish the lab :
+  * don’t worry about it
   * You’ll have the lab to practice later on
+
+## Lab conventions
+
+* Contain services, addressing scheme and conventions
+* Located [here](https://github.com/krikoon73/VXLAN-EVPN/blob/master/lab-conventions.md)
 
 ## ADC initial configurations
 
@@ -72,7 +77,7 @@
       2. Leaf4 = 100.100.100.4
    4. Configure ip-prefix list tenant-green-ibgp for redistributing CE-2 physical address connected to each PE 
       1. 100.100.100.3/24 on leaf-3
-      2. 1. 100.100.100.4/24 on leaf-4
+      2. 100.100.100.4/24 on leaf-4
    5. Configure the route-map redistribute-tenant-green 
       1. PF : tenant-green-ibgp
    6. Configure ip-prefix list tenant-green for filtering route coming from CE-2
@@ -103,11 +108,6 @@
        4. Confirm if prefixes are installed in VRF
        5. Verify reachability from all subnets on each host, if it works :)
           1. ping vrf vlan100
-
-## Lab conventions
-
-- Contain services, addressing scheme and conventions
-- Located [here](lab-conventions.md)
 
 ## Ip adressing scheme
 

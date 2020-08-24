@@ -22,6 +22,11 @@
   * don’t worry about it
   * You’ll have the lab to practice later on
 
+## Lab conventions
+
+* Contain services, addressing scheme and conventions
+* Located [here](https://github.com/krikoon73/VXLAN-EVPN/blob/master/lab-conventions.md)
+
 ## ADC initial configurations
 
 * Use this if you are going to start from day-1 only
@@ -47,13 +52,6 @@
 * Test reachability from Host1 to Host2 and vice versa
 * Test failover by disabling uplink of a leaf pair to Spine
 * Make sure there is no packet loss
-
-
-## Lab conventions
-
-- Contain services, addressing scheme and conventions
-- Located [here](lab-conventions.md)
-
 
 ## Usefull examples (try to not cut-and-paste)
 

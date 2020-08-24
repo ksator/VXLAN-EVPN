@@ -9,13 +9,15 @@
 * This lab will help to understand how to build an EVPN-VXLAN infrastructure in the following context
   * eBGP underlay
   * eBGP overlay
-  * note : it is easy to translate it to an IGP underlay model by configuring RR on the spines for the ooverlay session
+  * **Notes** :
+    * it is easy to translate it to an IGP underlay model by configuring RR on the spines for the overlay session. 
+    * the purpose of the training is to focus on EVPN and underlay is just a "transport" method.
 * This is not a “push-command” lab (except for IP addresses config. Or some basic stuff)
   * Try the commands
   * It could have some basic missing and traps
   * The goal is not to finish absolutely but more for understanding
   * Lab will be available after the training
-* **Save on each box the initial-configurations for later-purposes**
+* **Save on each box the initial-configurations for later-purposes or mistakes**
   * `copy running-config flash:init_conf_ADC.eos`
 * Don’t forget to save your running-configuration frequently.
   * `copy running-config startup-configuration`
@@ -24,15 +26,20 @@
   * don’t worry about it
   * We will use pre-configured stuff for the next labs
 
+## Lab conventions
+
+* Contain services, addressing scheme and conventions
+* Located [here](https://github.com/krikoon73/VXLAN-EVPN/blob/master/lab-conventions.md)
+
 ## ADC initial configurations
 
 * Use this if you are going to start from here : [Initial configurations](https://github.com/krikoon73/VXLAN-EVPN/tree/master/TRAINING/day-1/initial_conf)
 * Copy all these configurations to the boxes.
-* Save the configuration : **`copy running-config flash:init_IP_connectivity.eos`** 
+* Save the new configuration for later purposes or mistakes : **`copy running-config flash:init_IP_connectivity.eos`**
 
 ## EVPN Configuration steps
 
-1. Underlay view
+1. Underlay view - eBGP
 ![eBGP-underlay.png](eBGP-underlay.png)
 2. Peerings between Leaf and Spine switches should use physical interface IP
    1. On spines
@@ -66,7 +73,7 @@
    2. Verify if the IPv4 underlay sessions are up and loopback are reachable
       1. `show ip route`
       2. `ping` ...
-5. Configure VXLAN
+5. Configure VXLAN interface
    1. Enable interface `vxlan 1` and set the source interface to loopback 1
 6. Configure eBGP - EVPN for overlay
    1. Schema
@@ -87,7 +94,7 @@
 
 * Interface vxlan example
 
-``` 
+```
 interface Vxlan1
    vxlan source-interface Loopback1
 ```
@@ -186,11 +193,6 @@ router bgp 65000
 ```
 service routing protocols model multi-agent
 ```
-
-## Lab conventions
-
-- Contain services, addressing scheme and conventions
-- Located [here](lab-conventions.md)
 
 ## Ip adressing scheme
 
