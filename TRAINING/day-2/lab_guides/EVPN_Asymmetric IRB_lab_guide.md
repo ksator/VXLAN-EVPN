@@ -1,4 +1,8 @@
+## Topology 
+
 ![IRB-A-overview.png](IRB-A-overview.png)    
+
+## Instructions  
 
 This scenario is meant to be built on top of Scenario A.  
 
@@ -36,7 +40,6 @@ Verify the following
 - Do we have ECMP
 
 ## Examples (do not copy and paste): 
-
 
 - VLAN-to-VNI mappings  
 ```
