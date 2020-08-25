@@ -43,51 +43,51 @@
 ![eBGP-underlay.png](eBGP-underlay.png)
 2. Peerings between Leaf and Spine switches should use physical interface IP
    1. On spines
-      1. Configure ecmp : max paths 2, ecmp 2
-      2. Configure a peer-filter leaf-range : name => leaf-range
-      3. Configure a peer group to make the config : name => underlay-leaf-sessions
-      4. Associate neighbor to peer group
-      5. Use “bgp listen range”
-      6. Disable default IPv4 unicast address-family in global BGP configuration
-      7. Activate IPv4 session on peer group (address-family)
+      1. Configure router-id
+      2. Configure ecmp : max paths 2, ecmp 2
+      3. Disable default IPv4 unicast address-family in global BGP configuration
+      4. Configure a peer group to make the config easy : name => underlay-leaf-sessions
+      5. Use “bgp listen range” (Use a peer-filter leaf-range : name => leaf-range)
+      6. Activate IPv4 session on peer group (address-family)
    2. On leafs
-      1. Configure ecmp : max paths 2, ecmp 2
-      2. Configure a peer group to make the config : name => underlay-leaf-sessions
-      3. Associate neighbor to peer group
-      4. Disable default IPv4 unicast address-family in global BGP configuration
-      5. Activate IPv4 session on peer group (address-family)
-   3. Check BGP session between Spine and Leaf : 
+      1. Configure router-id
+      2. Configure ecmp : max paths 2, ecmp 2
+      3. Configure a peer group to make the config : name => underlay-leaf-sessions
+      4. Associate neighbor (correct address) to peer group
+      5. Disable default IPv4 unicast address-family in global BGP configuration
+      6. Activate IPv4 session on peer group (address-family)
+   3. Check BGP session between Spine and Leaf :
       1. `show ip bgp summary`
       2. `show ip bgp neighbor w.x.y.z received-routes`
       3. `show ip bgp neighbor w.x.y.z advertised-routes`
+      4. **Is ECMP Ok ?**
+      5. **Should you send community?**
 3. Configure iBGP over the peer link (leaf only)
    1. Use a peer group : mlag-ipv4-underlay-peer
    2. Associate the mlag-peer to the peer-group
    3. Use MLAG peer-link VLAN
-      1. (Shutdown the iBGP session) 
-      2. (more preferable in vEOS-lab)
+   4. **Is there something to do for avoiding any traffic blackholing when spine-links are down ?** 
 4. Advertise VTEP reachability
    1. Advertise all loopbacks (lo0 and lo1) to BGP using route-map
       1. Create  : ip prefix-list loopback … and route-map loopback ...
-      2. In the BGP conf. : redistribute connected route-map loopback
-   2. Verify if the IPv4 underlay sessions are up and loopback are reachable
+      2. In the BGP conf. : redistribute
+   2. Verify if the IPv4 underlay sessions are up and all loopback are reachable
       1. `show ip route`
       2. `ping` ...
-5. Configure VXLAN interface
-   1. Enable interface `vxlan 1` and set the source interface to loopback 1
+5. Configure VXLAN interface `vxlan 1`
+   1. Set the source interface to the correct loopback
 6. Configure eBGP - EVPN for overlay
    1. Schema
 ![eBGP-overlay.png](eBGP-overlay.png)
-   2. Use peer group to complete config (name : overlay-leaf-session)
+   2. Use a peer group to complete config (name : overlay-leaf-sessions)
       1. Disable maximum-routes
       2. Set the update-source
       3. Peer using the loopback0 interface
-   3. On Spine switches use bgp listen range
-   4. Don’t forget the EVPN bgp session are “multi-hop”
-   5. Don’t forget to send the extended community
-   6. Don’t forget that the spines is a route-server in case of EVPN
-   7. Don’t forget to activate the EVPN neighbord in the right address-familly
-   8. Don’t forget that EVPN require ArBGP enable (of course)
+   3. On Spine switches, adapt the configuration to use bgp listen range
+   4. On leaf switches, adapt the configuration 
+   5. Don’t forget the EVPN bgp session are “multi-hop”
+   6. **Do you need to send the 'extended communities' ?**
+   7. **Should the spines rewrite the next-hop ?**
 7. Verify if the EVPN sessions are up : `show bgp evpn summary`
 
 ## Usefull examples (try to not cut-and-paste)
