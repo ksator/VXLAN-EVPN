@@ -1,0 +1,73 @@
+
+## the basics 
+
+on leaf4
+
+sh vrf 
+sh vlan dynam
+
+sh int vxlan1
+sh vxlan vni 
+
+sh ip interface vrf tenant-blue brief 
+
+sh ip virtual-router
+
+sh vlan 
+sh vlan 40 
+sh vlan 50 
+sh bgp evpn instance
+
+sh version | grep "System MAC"
+
+sh ip arp vrf all 
+
+sh ip route vrf tenant-blue 
+
+## Demo  
+
+host2
+ping vrf vlan50 ip 10.0.40.1 source 10.0.50.2
+
+leaf3 (arp entry and mac address entry)
+sh ip arp vrf all 10.0.50.2
+sh mac address-table address 001c.734b.97ec vlan 50
+
+leaf2 
+sh ip arp vrf all 10.0.50.2
+sh int vlan50
+sh vlan 50
+
+sh mac address-table address 001c.734b.97ec vlan 50
+sh mac address-table address 001c.734b.97ec  
+
+sh ip route vrf tenant-blue 
+sh ip route vrf tenant-blue 10.0.50.2
+
+sh bgp evpn extcommunity router-mac 001c.73f1.7bf6
+
+#### Type 2
+sh bgp evpn route-type mac-ip 10.0.50.2
+sh bgp evpn route-type mac-ip 10.0.50.2 detail
+sh ip route vrf tenant-blue 
+
+#### Type 5 
+sh bgp evpn route-type ip-prefix ipv4 next-hop 2.2.2.2
+sh bgp evpn route-type ip-prefix ipv4 next-hop 2.2.2.2 detail 
+sh ip route vrf tenant-blue 
+
+#### clear arp
+
+leaf2 
+sh ip arp vrf tenant-blue 10.0.60.2
+sh bgp evpn route-type mac-ip 10.0.60.2
+
+leaf3
+sh ip arp vrf tenant-blue 10.0.60.2
+clear arp vrf tenant-blue 10.0.60.2 
+sh ip arp vrf tenant-blue 10.0.60.2
+
+leaf2
+sh ip arp vrf tenant-blue 10.0.60.2
+sh bgp evpn route-type mac-ip 10.0.60.2
+
