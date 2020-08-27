@@ -1,0 +1,70 @@
+#### basics  
+
+on leaf4
+
+sh vlan 
+sh bgp evpn instance
+sh run interfaces vxlan1
+sh int vxlan 1
+sh vxlan vni 
+sh vxlan flood vtep 
+sh ip route 1.1.1.1  
+
+#### type 2 
+
+host2#ping vrf vlan10  10.0.10.1 source  10.0.10.2
+
+
+on leaf3 or leaf 4
+(046c.2a0d.c682 is the host 2 mac address, host2 is connected to leaf 3 and leaf 4)
+sh mac address-table address 046c.2a0d.c682
+sh bgp evpn
+sh bgp evpn route-type mac-ip 046c.2a0d.c682 vni 10 
+sh bgp evpn route-type mac-ip 046c.2a0d.c682 vni 10 detail 
+sh bgp neighbors 123.1.1.1 evpn advertised-routes route-type mac-ip 046c.2a0d.c682
+sh bgp neighbors 123.1.1.1 evpn advertised-routes route-type mac-ip 046c.2a0d.c682 detail
+
+on leaf1 or leaf2 
+sh bgp neighbors  123.1.1.2 evpn received-routes
+sh bgp neighbors  123.1.1.2 evpn received-routes route-type mac-ip 046c.2a0d.c682 vni 10 detail 
+sh bgp evpn route-type mac-ip 046c.2a0d.c682 vni 10
+sh bgp evpn route-type mac-ip 046c.2a0d.c682 vni 10 detail 
+sh mac address-table address 046c.2a0d.c682
+sh vxlan address-table address 046c.2a0d.c682
+
+#### clear mac address table
+
+on leaf3 or leaf 4 
+
+sh mac address-table address 046c.2a0d.c682
+clear mac address-table dynamic
+sh mac address-table address 046c.2a0d.c682
+
+on leaf 1 or leaf 2
+sh mac address-table address 046c.2a0d.c682
+
+#### type 3
+
+on leaf4
+sh bgp neighbors 123.1.1.1 evpn received-routes route-type imet
+sh bgp neighbors 123.1.1.1 evpn received-routes route-type imet vni 10 detail 
+sh bgp evpn route-type imet
+sh bgp evpn route-type imet 1.1.1.1 vni 10 detail
+
+#### packet lost
+
+host2#ping vrf vlan10  10.0.10.1 source  10.0.10.2 repeat 2147483647
+
+on leaf 4
+sh bgp evpn summary
+sh ip bgp summary 
+leaf4(config)#router bgp 65002 
+leaf4(config-router-bgp)#neighbor 10.0.0.6 shutdown 
+leaf4(config-router-bgp)#neighbor 10.0.0.14 shutdown
+leaf4(config-router-bgp)#sh bgp evpn summary
+
+stop ping on host 2 and check if there is packet lost 
+
+
+
+
