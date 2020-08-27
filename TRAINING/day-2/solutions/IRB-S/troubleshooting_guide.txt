@@ -33,7 +33,7 @@ leaf3 (arp entry and mac address entry)
 sh ip arp vrf all 10.0.50.2
 sh mac address-table address 001c.734b.97ec vlan 50
 
-leaf2 
+leaf2 (no arp entry because no int vlan)
 sh ip arp vrf all 10.0.50.2
 sh int vlan50
 sh vlan 50
