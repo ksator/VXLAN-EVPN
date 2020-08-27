@@ -1,17 +1,19 @@
 # Directory for day-1 solutions
 
-[host1](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/host1_ADC_day1_solution.eos)
+## eBGP Underlay
 
-[host2](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/host2_ADC_day1_solution.eos)
+[host1](eBGP/host1_ADC_day1_solution_eBGP.eos)
 
-[leaf1](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/leaf1_ADC_day1_solution.eos)
+[host2](eBGP/host2_ADC_day1_solution_eBGP.eos)
 
-[leaf2](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/leaf2_ADC_day1_solution.eos)
+[leaf1](eBGP/leaf1_ADC_day1_solution_eBGP.eos)
 
-[leaf3](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/leaf3_ADC_day1_solution.eos)
+[leaf2](eBGP/leaf2_ADC_day1_solution_eBGP.eos)
 
-[leaf4](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/leaf4_ADC_day1_solution.eos)
+[leaf3](eBGP/leaf3_ADC_day1_solution_eBGP.eos)
 
-[spine1](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/spine1_ADC_day1_solution.eos)
+[leaf4](eBGP/leaf4_ADC_day1_solution_eBGP.eos)
 
-[spine2](https://github.com/krikoon73/VXLAN-EVPN/blob/master/TRAINING/day-1/solutions/spine2_ADC_day1_solution.eos)
+[spine1](eBGP/spine1_ADC_day1_solution_eBGP.eos)
+
+[spine2](eBGP/spine2_ADC_day1_solutions_eBGP.eos)
