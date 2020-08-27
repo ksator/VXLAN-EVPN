@@ -32,11 +32,13 @@ sh bgp neighbors 123.1.1.2 evpn advertised-routes route-type mac-ip 001c.734b.97
 sh bgp neighbors 123.1.1.2 evpn advertised-routes route-type mac-ip 001c.734b.97ec vni 25 detail
 
 leaf1 and leaf 2: 
-sh mac address-table addr 001c.734b.97ec vlan 25
-sh ip arp remote 
-sh vxlan address-table vlan 25 
 sh bgp evpn route-type mac-ip  001c.734b.97ec vni 25
 sh bgp evpn route-type mac-ip  001c.734b.97ec vni 25 detail
 sh bgp evpn next-hop 2.2.2.2 
+sh vxlan address-table vlan 25 
+sh mac address-table addr 001c.734b.97ec vlan 25
+sh ip arp remote 
+
+
 
 
