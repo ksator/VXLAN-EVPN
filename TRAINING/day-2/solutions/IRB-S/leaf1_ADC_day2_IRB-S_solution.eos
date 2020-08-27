@@ -1,4 +1,7 @@
 conf t
+!
+ip virtual-router mac-address aaaa.bbbb.cccc
+!
 vrf instance tenant-blue
 !
 vlan 40,45,60,1515

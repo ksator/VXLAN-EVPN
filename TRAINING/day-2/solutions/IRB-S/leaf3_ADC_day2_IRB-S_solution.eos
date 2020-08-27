@@ -1,6 +1,8 @@
 conf t
 vrf instance tenant-blue
 !
+ip virtual-router mac-address aaaa.bbbb.cccc
+!
 vlan 50,55,60
 !
 interface vxlan 1
