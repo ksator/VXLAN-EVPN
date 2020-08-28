@@ -54,7 +54,7 @@
    4. Configure PE-CE routing
       1. Use P2P links for BGP peering
       2. CE uses ASN4545
-      3. PE uses ASN5454 (no prepend)
+      3. PE should uses locally ASN5454 (no prepend)
       4. Check the bgp neighboring with CE
       5. Verify if the eBGP session is up within VRF and see if you get any message using 
          1. `show bgp neighbors vrf tenant-green for errors`
