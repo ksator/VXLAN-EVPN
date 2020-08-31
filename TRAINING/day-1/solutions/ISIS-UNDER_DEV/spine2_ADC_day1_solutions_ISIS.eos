@@ -5,27 +5,37 @@ interface Ethernet2
    default mtu
    no switchport
    ip address 10.0.0.8/31
+   isis enable UNDERLAY
+   isis network point-to-point
 !
 interface Ethernet3
    description leaf2
    default mtu
    no switchport
    ip address 10.0.0.10/31
+   isis enable UNDERLAY
+   isis network point-to-point
 !
 interface Ethernet4
    description leaf3
    default mtu
    no switchport
    ip address 10.0.0.12/31
+   isis enable UNDERLAY
+   isis network point-to-point
 !
 interface Ethernet5
    description leaf4
    default mtu
    no switchport
    ip address 10.0.0.14/31
+   isis enable UNDERLAY
+   isis network point-to-point
 !
 interface Loopback0
    ip address 123.1.1.2/32
+   isis enable UNDERLAY
+   isis passive
 !
 ip routing
 !
