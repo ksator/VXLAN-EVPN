@@ -45,6 +45,7 @@ peer-filter leaf-range
 !
 router bgp 65000
    router-id 123.1.1.2
+   bgp cluster-id 123.1.1.2
    no bgp default ipv4-unicast
    maximum-paths 2 ecmp 2
    bgp listen range 123.0.0.0/8 peer-group overlay-leaf-sessions peer-filter leaf-range
