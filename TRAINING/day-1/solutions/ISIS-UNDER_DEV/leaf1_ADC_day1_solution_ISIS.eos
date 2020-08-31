@@ -16,7 +16,6 @@ interface Ethernet1
 !
 interface Ethernet2
    description spine1
-   mtu 9100
    no switchport
    ip address 10.0.0.1/31
    isis enable UNDERLAY
@@ -24,7 +23,6 @@ interface Ethernet2
 !
 interface Ethernet3
    description spine2
-   mtu 9100
    no switchport
    ip address 10.0.0.9/31
    isis enable UNDERLAY

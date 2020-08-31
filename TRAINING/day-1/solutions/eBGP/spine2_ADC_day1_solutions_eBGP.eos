@@ -2,7 +2,7 @@ hostname spine2
 !
 interface Ethernet2
    description leaf1
-   mtu 9100
+   default mtu
    no switchport
    ip address 10.0.0.8/31
    isis enable UNDERLAY
@@ -10,7 +10,7 @@ interface Ethernet2
 !
 interface Ethernet3
    description leaf2
-   mtu 9100
+   default mtu
    no switchport
    ip address 10.0.0.10/31
    isis enable UNDERLAY
@@ -18,7 +18,7 @@ interface Ethernet3
 !
 interface Ethernet4
    description leaf3
-   mtu 9100
+   default mtu
    no switchport
    ip address 10.0.0.12/31
    isis enable UNDERLAY
@@ -26,7 +26,7 @@ interface Ethernet4
 !
 interface Ethernet5
    description leaf4
-   mtu 9100
+   default mtu
    no switchport
    ip address 10.0.0.14/31
    isis enable UNDERLAY
@@ -40,9 +40,10 @@ interface Loopback0
 ip routing
 !
 router isis UNDERLAY
-   net 49.0001.1230.0100.1001.00
-   router-id IPv4 123.1.1.1
+   net 49.0001.1230.0100.1002.00
+   router-id IPv4 123.1.1.2
    is-type level-2
+   is-hostname spine2
    log-adjacency-changes
    !
    address-family IPv4 unicast
