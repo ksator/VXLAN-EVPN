@@ -1,6 +1,4 @@
-leaf3
-
-conf t
+!
 vrf instance tenant-green
 !
 vlan 2002

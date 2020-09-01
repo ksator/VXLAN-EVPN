@@ -1,4 +1,4 @@
-conf t
+!
 vrf instance tenant-blue
 !
 ip virtual-router mac-address aaaa.bbbb.cccc

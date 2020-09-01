@@ -1,3 +1,4 @@
+!
 vrf instance tenant-green
 !
 interface Ethernet5
