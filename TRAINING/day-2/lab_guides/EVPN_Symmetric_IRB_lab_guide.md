@@ -45,51 +45,51 @@ Configure additional Lo223 locally
   - Where x = Leaf number
 -   Try pinging and see if we use the Lo223  as a source when generating packets or replies.
 
-## Examples (do not copy and paste): 
+## Configuration templates: 
 
 
 - VLANs
 ```
-vlan 40, 60
+vlan {{ vlan_id }},{{ vlan_id }}
 ```
 - VLAN-to-VNI mappings  
 ```
 interface vxlan 1
-   vxlan vlan 60 vni 60
+   vxlan vlan {{ vlan_id }} vni {{ l2_vni }}
 ```
 - MAC VRF
 ```
-router bgp 65001
-    vlan 60
-        rd 123.1.1.3:60
-        route-target both 60:60
-        redistribute learned
+router bgp {{ asn }}
+   vlan {{ vlan_id }}
+  	rd {{ router_id }}:{{ vlan_id }} 
+  	route-target both {{ vlan_id }}:{{ vlan_id }} 
+  	redistribute learned
 ```
 - VRF 
 ```
-vrf instance tenant-blue
-!
-ip routing vrf tenant-blue
+vrf instance {{ vrf_name }}
+
+ip routing vrf {{ vrf_name }}
 ```
 - VRF-to-VNI mappings  
 ```
 interface vxlan 1
-   vxlan vrf tenant-blue vni 12345
+   vxlan vrf {{ vrf_name }} vni {{ l3_vni }}
 ```
 - IRB configuration 
 ```
-ip virtual-router mac-address aaaa.bbbb.cccc
+ip virtual-router mac-address {{ virtual_mac_address }}
 !
-interface Vlan60
-   vrf tenant-blue
-   ip address virtual 10.0.60.254/24
+interface Vlan{{ vlan_id }} 
+   vrf {{ vrf_name }}
+   ip address virtual {{ virtual_ip }}/{{ subnet }}
 ```
 - VRF configuration 
 ```
-router bgp 65001
-    vrf tenant-blue
-       rd 123.1.1.3:12345
-       route-target both 12345:12345
+router bgp {{ asn }}
+    vrf {{ vrf_name }}
+       rd {{ router_id }}:{{ l3_vni }}
+       route-target both  {{ l3_vni }}:{{ l3_vni }}
        redistribute connected
 ```
 
