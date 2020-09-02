@@ -39,37 +39,37 @@ Verify the following
 - Host to host reachability inter VLAN
 - Do we have ECMP
 
-## Examples (do not copy and paste): 
+## Configuration templates
 
 - VLAN-to-VNI mappings  
 ```
-vlan 25 
+vlan {{ vlan_id }} 
 !
 interface Vxlan1
-   vxlan vlan 25 vni 25
+   vxlan vlan {{ vlan_id }} vni {{ l2_vni }}
 ```
 - IRB configuration 
 ```
-ip virtual-router mac-address aaaa.bbbb.cccc
+ip virtual-router mac-address {{ virtual_mac_address }}
 !
-interface Vlan25
-   ip address virtual 10.0.25.254/24
+interface Vlan{{ vlan_id }} 
+   ip address virtual {{ virtual_ip }}/{{ subnet }}
 ```
 - Vlan-based service interface 
 ```
-router bgp 65001
-   vlan 25
-  	rd 123.1.1.4:25
-  	route-target both 25:25
+router bgp {{ asn }}
+   vlan {{ vlan_id }}
+  	rd {{ router_id }}:{{ vlan_id }} 
+  	route-target both {{ vlan_id }}:{{ vlan_id }} 
   	redistribute learned
 ```
 - Vlan-aware bundle service interface 
 ```
-router bgp 65001
-   vlan-aware-bundle vlan2030
-  	rd 123.1.1.4:2030
+router bgp {{ asn }}
+   vlan-aware-bundle {{ bundle_name }} 
+  	rd {{ router_id }}:2030
   	route-target both 2030:2030
   	redistribute learned
-  	vlan 20,30
+  	vlan {{ vlan_id }},{{ vlan_id }}
 ```
 
