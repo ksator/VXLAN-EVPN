@@ -68,7 +68,7 @@ interface vxlan 1
   vxlan vlan {{ vlan_id }} vni {{ l2_vni }}
 ```
 
-* MAC VRF configuration (vlan aware)
+* MAC VRF configuration (vlan based)
 
 ```
 router bgp {{ asn }}
