@@ -53,27 +53,27 @@
 * Test failover by disabling uplink of a leaf pair to Spine
 * Make sure there is no packet loss
 
-## Usefull examples (try to not cut-and-paste)
+## Configuration templates
 
 * vlan configuration
 
 ```
-vlan 10
+vlan {{ vlan_id }}
 ```
 
 * L2 VNI configuration
 
 ```
 interface vxlan 1
-  vxlan vlan 10 vni 10
+  vxlan vlan {{ vlan_id }} vni {{ l2_vni }}
 ```
 
 * MAC VRF configuration (vlan aware)
 
 ```
-router bgp 65001
-  vlan 10
-    rd 123.1.1.3:10
-    route-target both 10:10
+router bgp {{ asn }}
+  vlan {{ vlan_id }}
+    rd {{ router_id }}:{{ vlan_id }} 
+    route-target both {{ vlan_id }}:{{ vlan_id }} 
     redistribute learned
 ```
