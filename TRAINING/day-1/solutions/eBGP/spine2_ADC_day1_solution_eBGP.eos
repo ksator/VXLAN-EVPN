@@ -2,53 +2,37 @@ hostname spine2
 !
 interface Ethernet2
    description leaf1
-   default mtu
+   mtu 9100
    no switchport
    ip address 10.0.0.8/31
-   isis enable UNDERLAY
-   isis network point-to-point
 !
 interface Ethernet3
    description leaf2
-   default mtu
+   mtu 9100
    no switchport
    ip address 10.0.0.10/31
-   isis enable UNDERLAY
-   isis network point-to-point
 !
 interface Ethernet4
    description leaf3
-   default mtu
+   mtu 9100
    no switchport
    ip address 10.0.0.12/31
-   isis enable UNDERLAY
-   isis network point-to-point
 !
 interface Ethernet5
    description leaf4
-   default mtu
+   mtu 9100
    no switchport
    ip address 10.0.0.14/31
-   isis enable UNDERLAY
-   isis network point-to-point
 !
 interface Loopback0
    ip address 123.1.1.2/32
-   isis enable UNDERLAY
-   isis passive
 !
 ip routing
 !
-router isis UNDERLAY
-   net 49.0001.1230.0100.1002.00
-   router-id IPv4 123.1.1.2
-   is-type level-2
-   is-hostname spine2
-   log-adjacency-changes
-   !
-   address-family IPv4 unicast
-      maximum-paths 2
-      address-family ipv4 unicast
+ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+!
+route-map loopback permit 10
+   match ip address prefix-list loopback
 !
 peer-filter leaf-range
    10 match as-range 65001-65004 result accept
@@ -64,9 +48,14 @@ router bgp 65000
    neighbor overlay-leaf-sessions ebgp-multihop 2
    neighbor overlay-leaf-sessions send-community extended
    neighbor overlay-leaf-sessions maximum-routes 0
+   neighbor underlay-leaf-sessions peer group
+   neighbor underlay-leaf-sessions maximum-routes 12000
+   redistribute connected route-map loopback
    !
    address-family evpn
   	bgp next-hop-unchanged
   	neighbor overlay-leaf-sessions activate
    !
+   address-family ipv4
+  	neighbor underlay-leaf-sessions activate
 end

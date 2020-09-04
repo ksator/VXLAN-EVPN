@@ -37,6 +37,10 @@ spine = nr.filter(type="network_device", role="spine")
 leaf = nr.filter(type="network_device", role="leaf")
 host = nr.filter(type="network_device", role="host")
 
+print(args.action)
+print(args.lab)
+print(args.option)
+
 if args.action == "push":
     if args.lab == "infra":
         if args.option == "isis":
