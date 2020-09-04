@@ -3,6 +3,8 @@ vrf instance tenant-green
 !
 vlan 2002
 !
+vlan 100
+!
 interface Loopback100
    vrf tenant-green
    ip address 100.100.100.4/32

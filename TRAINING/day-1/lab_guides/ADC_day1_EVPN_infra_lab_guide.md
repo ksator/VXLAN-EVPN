@@ -6,9 +6,9 @@
 
 ## Notes about this lab
 
-* This lab will help to understand how to build an EVPN-VXLAN infrastructure in the following context
-  * eBGP underlay
-  * eBGP overlay
+* This lab will help to understand how to build an EVPN-VXLAN infrastructure in the following contexts
+  * Use case 1 : eBGP for underlay and overlay
+  * Use case 2 : ISIS for underlay and iBGP for overlay 
   * **Notes** :
     * it is easy to translate it to an IGP underlay model by configuring RR on the spines for the overlay session. 
     * the purpose of the training is to focus on EVPN and underlay is just a "transport" method.
@@ -37,7 +37,16 @@
 * Copy all these configurations to the boxes.
 * Save the new configuration for later purposes or mistakes : **`copy running-config flash:init_IP_connectivity.eos`**
 
-## EVPN Configuration steps
+## Use case 1 : EVPN configuration guide (**under development**)
+
+1. Underlay - ISIS
+   1. On spines
+   2. On leafs
+2. Overlay - iBGP
+   1. On spines
+   2. On leaves
+
+## Use case 2 : EVPN Configuration steps
 
 1. Underlay view - eBGP
 ![eBGP-underlay.png](eBGP-underlay.png)
@@ -96,14 +105,14 @@
 
 ```
 interface Vxlan1
-   vxlan source-interface Loopback1
+   vxlan source-interface {{ loopback VTEP }}
 ```
 
 * Access list example on vtep1
 
 ```
-ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
-ip prefix-list loopback seq 20 permit 1.1.1.1/32
+ip prefix-list loopback seq 10 permit {{ loopback EVPN subnet }}
+ip prefix-list loopback seq 20 permit {{ looback VTEP }}
 
 route-map loopback permit 10
    match ip address prefix-list loopback
@@ -112,43 +121,43 @@ route-map loopback permit 10
 * BGP snippet for leaf1
 
 ``` 
-router bgp 65001
-   router-id 123.1.1.3
+router bgp {{ asn }}
+   router-id {{ BGP router ID }}
    no bgp default ipv4-unicast
-   maximum-paths 2 ecmp 2
-   neighbor overlay-leaf-sessions peer group
-   neighbor overlay-leaf-sessions remote-as 65000
-   neighbor overlay-leaf-sessions update-source Loopback0
-   neighbor overlay-leaf-sessions ebgp-multihop 2
-   neighbor overlay-leaf-sessions send-community extended
-   neighbor overlay-leaf-sessions maximum-routes 0
-   neighbor underlay-leaf-sessions peer group
-   neighbor underlay-leaf-sessions remote-as 65000
-   neighbor underlay-leaf-sessions maximum-routes 12000
-   neighbor mlag-ipv4-underlay-peer peer group
-   neighbor mlag-ipv4-underlay-peer remote-as 65001
-   neighbor mlag-ipv4-underlay-peer next-hop-self
-   neighbor mlag-ipv4-underlay-peer send-community
-   neighbor 10.0.0.0 peer group underlay-leaf-sessions
-   neighbor 10.0.0.8 peer group underlay-leaf-sessions
-   neighbor 123.1.1.1 peer group overlay-leaf-sessions
-   neighbor 123.1.1.2 peer group overlay-leaf-sessions
-   neighbor 172.16.1.1 peer group mlag-ipv4-underlay-peer
+   maximum-paths {{ max links to spine }} ecmp {{ ECMP number }}
+   neighbor {{ peer group name for overlay session }} peer group
+   neighbor {{ peer group name for overlay session }} remote-as {{ remote asn }}
+   neighbor {{ peer group name for overlay session }} update-source Loopback0
+   neighbor {{ peer group name for overlay session }} ebgp-multihop 2
+   neighbor {{ peer group name for overlay session }} send-community extended
+   neighbor {{ peer group name for overlay session }} maximum-routes 0
+   neighbor {{ peer group name for underlay session }} peer group
+   neighbor {{ peer group name for underlay session }} remote-as {{ remote asn }}
+   neighbor {{ peer group name for underlay session }} maximum-routes 12000
+   neighbor {{ peer group name for underlay session between mlag pair }} peer group
+   neighbor {{ peer group name for underlay session between mlag pair }} remote-as {{ remote mlag asn }}
+   neighbor {{ peer group name for underlay session between mlag pair }} next-hop-self
+   neighbor {{ peer group name for underlay session between mlag pair }} send-community
+   neighbor {{ spine interface }} peer group {{ peer group name for underlay session }}
+   neighbor {{ spine interface }} peer group {{ peer group name for underlay session }}
+   neighbor {{ spine loopback }} peer group {{ peer group name for overlay session }}
+   neighbor {{ spine loopback }} peer group {{ peer group name for overlay session }}
+   neighbor {{ mlag peer interface }} peer group {{ peer group name for underlay session between mlag pair }}
    redistribute connected route-map loopback
    !
    address-family evpn
-      neighbor overlay-leaf-sessions activate
+      neighbor {{ peer group name for overlay session }} activate
    !
    address-family ipv4
-      neighbor underlay-leaf-sessions activate
-      neighbor 172.16.1.1 activate
+      neighbor {{ peer group name for underlay session }} activate
+      neighbor {{ peer group name for underlay session between mlag pair }} activate
 !
 ```
 
 * Access list example on spine1
 
 ```
-ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+ip prefix-list loopback seq 10 permit {{ loopback EVPN subnet }}
 
 route-map loopback permit 10
    match ip address prefix-list loopback
@@ -159,33 +168,33 @@ route-map loopback permit 10
 
 ```
 peer-filter leaf-range
-   10 match as-range 65001-65004 result accept
+   10 match as-range {{ as range }} result accept
 ```
 
 * BGP snippet for spine1
 
 ``` 
-router bgp 65000
-   router-id 123.1.1.1
+router bgp {{ asn }}
+   router-id {{ BGP router-id }}
    no bgp default ipv4-unicast
-   maximum-paths 2 ecmp 2
-   bgp listen range 123.0.0.0/8 peer-group overlay-leaf-sessions peer-filter leaf-range
-   bgp listen range 10.0.0.0/8 peer-group underlay-leaf-sessions peer-filter leaf-range
-   neighbor overlay-leaf-sessions peer group
-   neighbor overlay-leaf-sessions update-source Loopback0
-   neighbor overlay-leaf-sessions ebgp-multihop 2
-   neighbor overlay-leaf-sessions send-community extended
-   neighbor overlay-leaf-sessions maximum-routes 0
-   neighbor underlay-leaf-sessions peer group
-   neighbor underlay-leaf-sessions maximum-routes 12000
+   maximum-paths {{ max links to spine }} ecmp {{ ECMP number }}
+   bgp listen range {{ ip subnet range for loopback }} peer-group {{ peer group name for overlay session }} peer-filter leaf-range
+   bgp listen range {{ ip subnet range for loopback }} peer-group underlay-leaf-sessions peer-filter leaf-range
+   neighbor {{ peer group name for overlay session }} peer group
+   neighbor {{ peer group name for overlay session }} update-source Loopback0
+   neighbor {{ peer group name for overlay session }} ebgp-multihop 2
+   neighbor {{ peer group name for overlay session }} send-community extended
+   neighbor {{ peer group name for overlay session }} maximum-routes 0
+   neighbor {{ peer group name for underlay session }} peer group
+   neighbor {{ peer group name for underlay session }} maximum-routes 12000
    redistribute connected route-map loopback
    !
    address-family evpn
       bgp next-hop-unchanged
-      neighbor overlay-leaf-sessions activate
+      neighbor {{ peer group name for overlay session }} activate
    !
    address-family ipv4
-      neighbor underlay-leaf-sessions activate
+      neighbor {{ peer group name for underlay session }} activate
 ```
 
 * ArBGP Activation
