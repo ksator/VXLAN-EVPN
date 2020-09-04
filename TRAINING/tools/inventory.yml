@@ -1,0 +1,137 @@
+---
+leaf1:
+  hostname: 192.168.122.12
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: leaf
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/leaf1_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/leaf1_ADC_day1_solution_eBGP.eos"
+    l2: "../day-2/solutions/L2VPN/leaf1_ADC_day2_L2VPN_solution.eos"
+    irb-a: "../day-2/solutions/IRB-A/leaf1_ADC_day2_IRB-A_solution.eos"
+    irb-s: "../day-2/solutions/IRB-S/leaf1_ADC_day2_IRB-S_solution.eos"
+    option-a: "../day-3/solutions/leaf1_ADC_day3_L3VPN_solution.eos"
+leaf2:
+  hostname: 192.168.122.13
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: leaf
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/leaf2_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/leaf2_ADC_day1_solution_eBGP.eos"
+    l2: "../day-2/solutions/L2VPN/leaf2_ADC_day2_L2VPN_solution.eos"
+    irb-a: "../day-2/solutions/IRB-A/leaf2_ADC_day2_IRB-A_solution.eos"
+    irb-s: "../day-2/solutions/IRB-S/leaf2_ADC_day2_IRB-S_solution.eos"
+    option-a: "../day-3/solutions/leaf2_ADC_day3_L3VPN_solution.eos"
+leaf3:
+  hostname: 192.168.122.14
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: leaf
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/leaf3_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/leaf3_ADC_day1_solution_eBGP.eos"
+    l2: "../day-2/solutions/L2VPN/leaf3_ADC_day2_L2VPN_solution.eos"
+    irb-a: "../day-2/solutions/IRB-A/leaf3_ADC_day2_IRB-A_solution.eos"
+    irb-s: "../day-2/solutions/IRB-S/leaf3_ADC_day2_IRB-S_solution.eos"
+    option-a: "../day-3/solutions/leaf3_ADC_day3_L3VPN_solution.eos"
+leaf4:
+  hostname: 192.168.122.15
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: leaf
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/leaf4_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/leaf4_ADC_day1_solution_eBGP.eos"
+    l2: "../day-2/solutions/L2VPN/leaf4_ADC_day2_L2VPN_solution.eos"
+    irb-a: "../day-2/solutions/IRB-A/leaf4_ADC_day2_IRB-A_solution.eos"
+    irb-s: "../day-2/solutions/IRB-S/leaf4_ADC_day2_IRB-S_solution.eos"
+    option-a: "../day-3/solutions/leaf4_ADC_day3_L3VPN_solution.eos"
+spine1:
+  hostname: 192.168.122.10
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: spine
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/spine1_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/spine1_ADC_day1_solution_eBGP.eos"
+spine2:
+  hostname: 192.168.122.11
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: spine
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/spine2_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/spine2_ADC_day1_solution_eBGP.eos"
+host1:
+  hostname: 192.168.122.16
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: host
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/host1_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/host1_ADC_day1_solution_eBGP.eos"
+host2:
+  hostname: 192.168.122.17
+  port: 443
+  username: admin
+  password: arista
+  platform: eos
+  groups:
+    - ADC
+  data:
+    role: host
+    site: OVH-LAB
+    type: network_device
+    init: "init_IP_connectivity.eos"
+    isis: "../day-1/solutions/ISIS/host2_ADC_day1_solution_ISIS.eos"
+    ebgp: "../day-1/solutions/eBGP/host2_ADC_day1_solution_eBGP.eos"

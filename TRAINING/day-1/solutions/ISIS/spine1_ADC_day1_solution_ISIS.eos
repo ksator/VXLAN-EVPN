@@ -1,0 +1,71 @@
+hostname spine1
+!
+interface Ethernet2
+   description leaf1
+   default mtu
+   no switchport
+   ip address 10.0.0.0/31
+   isis enable UNDERLAY
+   isis network point-to-point
+!
+interface Ethernet3
+   description leaf2
+   default mtu
+   no switchport
+   ip address 10.0.0.2/31
+   isis enable UNDERLAY
+   isis network point-to-point
+!
+interface Ethernet4
+   description leaf3
+   default mtu
+   no switchport
+   ip address 10.0.0.4/31
+   isis enable UNDERLAY
+   isis network point-to-point
+!
+interface Ethernet5
+   description leaf4
+   default mtu   
+   no switchport
+   ip address 10.0.0.6/31
+   isis enable UNDERLAY
+   isis network point-to-point
+!
+interface Loopback0
+   ip address 123.1.1.1/32
+   isis enable UNDERLAY
+   isis passive
+!
+ip routing
+!
+router isis UNDERLAY
+   net 49.0001.1230.0100.1001.00
+   router-id IPv4 123.1.1.1
+   is-type level-2
+   is-hostname spine1
+   log-adjacency-changes
+   !
+   address-family IPv4 unicast
+      maximum-paths 2
+      address-family ipv4 unicast
+!
+peer-filter leaf-range
+   10 match as-range 65001-65004 result accept
+!
+router bgp 65000
+   router-id 123.1.1.1
+   bgp cluster-id 123.1.1.1
+   no bgp default ipv4-unicast
+   maximum-paths 2 ecmp 2
+   bgp listen range 123.0.0.0/8 peer-group overlay-leaf-sessions peer-filter leaf-range
+   neighbor overlay-leaf-sessions peer group
+   neighbor overlay-leaf-sessions update-source Loopback0
+   neighbor overlay-leaf-sessions ebgp-multihop 2
+   neighbor overlay-leaf-sessions send-community extended
+   neighbor overlay-leaf-sessions maximum-routes 0
+   !
+   address-family evpn
+  	neighbor overlay-leaf-sessions activate
+   !
+end

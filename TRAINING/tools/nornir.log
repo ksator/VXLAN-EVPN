@@ -1,0 +1,9 @@
+2020-09-04 09:40:20,366 -  nornir.core -     INFO -        run() - Running task 'device_replace_conf' with args {'configuration': 'init_IP_connectivity.eos'} on 2 hosts
+2020-09-04 09:40:21,809 -  nornir.core -     INFO -        run() - Running task 'device_replace_conf' with args {'configuration': 'init_IP_connectivity.eos'} on 4 hosts
+2020-09-04 09:47:04,954 -  nornir.core -     INFO -        run() - Running task 'device_merge_conf' with args {'configuration': 'ebgp'} on 2 hosts
+2020-09-04 09:47:06,919 -  nornir.core -     INFO -        run() - Running task 'device_merge_conf' with args {'configuration': 'ebgp'} on 4 hosts
+2020-09-04 10:01:18,826 -  nornir.core -     INFO -        run() - Running task 'device_replace_conf' with args {'configuration': 'init_IP_connectivity.eos'} on 2 hosts
+2020-09-04 10:01:20,006 -  nornir.core -     INFO -        run() - Running task 'device_replace_conf' with args {'configuration': 'init_IP_connectivity.eos'} on 4 hosts
+2020-09-04 10:01:21,686 -  nornir.core -     INFO -        run() - Running task 'device_replace_conf' with args {'configuration': 'init_IP_connectivity.eos'} on 2 hosts
+2020-09-04 10:01:55,279 -  nornir.core -     INFO -        run() - Running task 'device_merge_conf' with args {'configuration': 'ebgp'} on 2 hosts
+2020-09-04 10:01:57,266 -  nornir.core -     INFO -        run() - Running task 'device_merge_conf' with args {'configuration': 'ebgp'} on 4 hosts
