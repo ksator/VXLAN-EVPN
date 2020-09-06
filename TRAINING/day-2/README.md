@@ -8,4 +8,6 @@
 
 4. For Symmetric IRB : Follow this [lab guide](lab_guides/EVPN_Symmetric_IRB_lab_guide.md)
 
-5. Try to not use the [solutions](https://github.com/krikoon73/VXLAN-EVPN/tree/master/TRAINING/day-2/solutions)
+5. For the EVPN-VXLAN troubleshooting lab: Follow this [lab guide](lab_guides/EVPN_VXLAN_troubleshooting_lab_guide.md) 
+
+6. Try to not use the [solutions](solutions)
