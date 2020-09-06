@@ -1,0 +1,143 @@
+hostname leaf3
+!
+vlan 50,55,60
+
+vlan 4094
+   trunk group mlag-peer
+!
+vrf instance tenant-blue
+!
+interface Port-Channel100
+   description mlag
+   switchport mode trunk
+   switchport trunk group mlag-peer
+!
+interface Ethernet1
+   description mlag
+   channel-group 100 mode active
+!
+interface Ethernet2
+   description spine1
+   mtu 9100
+   no switchport
+   ip address 10.0.0.5/31
+!
+interface Ethernet3
+   description spine2
+   mtu 9100
+   no switchport
+   ip address 10.0.0.13/31
+!
+interface Ethernet4
+   description host2
+   channel-group 2 mode active
+   shutdown 
+!
+interface Ethernet5
+   description host2-later-a/a
+   shutdown
+!
+interface Port-Channel2
+   description host2
+   switchport mode trunk
+   mlag 2
+!
+interface Loopback0
+   description bgp-evpn
+   ip address 123.1.1.5/32
+!
+interface Loopback1
+   description vxlan
+   ip address 2.2.2.2/32
+!
+interface Vlan50
+   vrf tenant-blue
+   ip address virtual 10.0.50.254/24
+   !
+interface Vlan55
+   vrf tenant-blue
+   ip address virtual 10.0.55.254/24
+   !
+interface Vlan60
+   vrf tenant-blue
+   ip address virtual 10.0.60.254/24
+   !
+interface Vlan1515
+   vrf tenant-blue
+   ip address 223.255.255.3/24
+!
+interface Vlan4094
+   ip address 172.16.1.0/31
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 50 vni 50
+   vxlan vlan 55 vni 55
+   vxlan vrf tenant-blue vni 12345
+!
+ip routing
+ip routing vrf tenant-blue
+ip virtual-router mac-address aaaa.bbbb.cccc
+!
+ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+ip prefix-list loopback seq 20 permit 2.2.2.2/32
+!
+mlag configuration
+   domain-id mlag
+   local-interface Vlan4094
+   peer-address 172.16.1.1
+   peer-link Port-Channel100
+!
+route-map loopback permit 10
+   match ip address prefix-list loopback
+!
+router bgp 65002
+   router-id 123.1.1.5
+   no bgp default ipv4-unicast
+   maximum-paths 2 ecmp 2
+   neighbor overlay-leaf-sessions peer group
+   neighbor overlay-leaf-sessions remote-as 65000
+   neighbor overlay-leaf-sessions update-source Loopback0
+   neighbor overlay-leaf-sessions ebgp-multihop 2
+   neighbor overlay-leaf-sessions send-community extended
+   neighbor overlay-leaf-sessions maximum-routes 0
+   neighbor underlay-leaf-sessions peer group
+   neighbor underlay-leaf-sessions remote-as 65000
+   neighbor underlay-leaf-sessions maximum-routes 12000
+   neighbor mlag-ipv4-underlay-peer peer group
+   neighbor mlag-ipv4-underlay-peer remote-as 65002
+   neighbor mlag-ipv4-underlay-peer next-hop-self
+   neighbor mlag-ipv4-underlay-peer send-community
+   neighbor 10.0.0.4 peer group underlay-leaf-sessions
+   neighbor 10.0.0.12 peer group underlay-leaf-sessions
+   neighbor 123.1.1.1 peer group overlay-leaf-sessions
+   neighbor 123.1.1.2 peer group overlay-leaf-sessions
+   neighbor 172.16.1.1 peer group mlag-ipv4-underlay-peer
+   redistribute connected route-map loopback
+   !
+   address-family evpn
+  	neighbor overlay-leaf-sessions activate
+   !
+   address-family ipv4
+  	neighbor underlay-leaf-sessions activate
+  	neighbor 172.16.1.1 activate
+   !
+   vlan 50
+        rd 123.1.1.5:50
+        route-target both 50:50
+        redistribute learned
+   vlan 55
+        rd 123.1.1.5:55
+        route-target both 55:55
+        redistribute learned
+   vlan 60
+        rd 123.1.1.5:60
+        route-target both 60:60
+   vrf tenant-blue
+       rd 123.1.1.5:12345
+       route-target both 12345:12345
+       redistribute connected
+!
+end
+!
