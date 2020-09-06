@@ -1,5 +1,7 @@
 ## Topology  
 
+![lab-topology.png](lab-topology.png)
+
 ![IRB-S-overview.png](IRB-S-overview.png)   
 
 VLAN40 (S1) VLAN45 (S2) are only on VTEP 1.1.1.1  
