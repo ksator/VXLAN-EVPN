@@ -1,0 +1,61 @@
+hostname spine1
+!
+interface Ethernet2
+   description leaf1
+   mtu 9100
+   no switchport
+   ip address 10.0.0.0/31
+!
+interface Ethernet3
+   description leaf2
+   mtu 9100
+   no switchport
+   ip address 10.0.0.2/31
+!
+interface Ethernet4
+   description leaf3
+   mtu 9100
+   no switchport
+   ip address 10.0.0.4/31
+!
+interface Ethernet5
+   description leaf4
+   mtu 9100
+   no switchport
+   ip address 10.0.0.6/31
+!
+interface Loopback0
+   ip address 123.1.1.1/32
+!
+ip routing
+!
+ip prefix-list loopback seq 10 permit 123.1.1.0/24 le 32
+!
+route-map loopback permit 10
+   match ip address prefix-list loopback
+!
+peer-filter leaf-range
+   10 match as-range 65001-65004 result accept
+!
+router bgp 65000
+   router-id 123.1.1.1
+   no bgp default ipv4-unicast
+   maximum-paths 2 ecmp 2
+   bgp listen range 123.0.0.0/8 peer-group overlay-leaf-sessions peer-filter leaf-range
+   bgp listen range 10.0.0.0/8 peer-group underlay-leaf-sessions peer-filter leaf-range
+   neighbor overlay-leaf-sessions peer group
+   neighbor overlay-leaf-sessions update-source Loopback0
+   neighbor overlay-leaf-sessions ebgp-multihop 2
+   neighbor overlay-leaf-sessions send-community extended
+   neighbor overlay-leaf-sessions maximum-routes 0
+   neighbor underlay-leaf-sessions peer group
+   neighbor underlay-leaf-sessions maximum-routes 12000
+   redistribute connected route-map loopback
+   !
+   address-family evpn
+  	bgp next-hop-unchanged
+  	neighbor overlay-leaf-sessions activate
+   !
+   address-family ipv4
+  	neighbor underlay-leaf-sessions activate
+end

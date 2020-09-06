@@ -5,3 +5,5 @@
 2. For Asymmetric IRB : Follow this [lab guide](lab_guides/EVPN_Asymmetric_IRB_lab_guide.md)
 
 3. For Symmetric IRB : Follow this [lab guide](lab_guides/EVPN_Symmetric_IRB_lab_guide.md)
+
+4. For EVPN-VXLAN troubleshooting : Follow this [lab guide](lab_guides/EVPN_VXLAN_troubleshooting_lab_guide.md)
