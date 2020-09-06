@@ -42,7 +42,7 @@ leaf3(config-macvrf-60)#
 
 Add `redistribute learned` to this mac vrf on leaf 3 and leaf 4
 
-### RT mismatch (leaf 1/leaf 2 vs leaf 3/leaf 4)
+### RT mismatch (leaf 1/leaf 2 vs leaf 3/leaf 4)
 
 #### leaf 1/leaf 2 use 1060:1060 
 
