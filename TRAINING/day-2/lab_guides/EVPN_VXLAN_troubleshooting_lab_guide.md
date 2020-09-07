@@ -69,6 +69,8 @@ It doesnt work
 
 #### Spot the root causes and fix the issues 
 
-Refer to the network diagramm and use the various show commands we discussed to spot and fix all issues 
+Refer to the network diagramm and use the various show commands we discussed to spot and fix all issues  
+
+Some of the issues are blocking (i.e some traffic is broken) and some other issues are not blocking (i.e the traffic passes but it is not optimal i.e think about ecmp, flooding, some bgp neighbors are not established ....). 
 
 Try to not use the [solution](/TRAINING/day-2/solutions/Troubleshooting_lab)
