@@ -2,7 +2,7 @@
 
 Use cases examples:  
 - DCI without L2 stretch between data centers. 
-- connection to an external router (border leaf <-> external router). 
+- connection to an external router (local border leaf <-> external router). 
 
 ## Topology description: 
 
@@ -20,18 +20,19 @@ In this scenario:
   - or a border leaf in a remote datacenter (in that case there are 2 DC in total).    
 - so the leaves 1 and 2 are border leaves. 
 
-## Instructions: 
+## Instructions 
 
 load S-IRB configuration on the devices.  
 
-We will use one vlan tag for each IP VRF.  
-`tenant-blue` is an IP VRF. The vlan tag `1234` will be used for the IP VRF `tenant-blue`  
+We will use one vlan tag for each IP VRF: 
+- `tenant-blue` is an IP VRF. The vlan tag `1234` will be used for the IP VRF `tenant-blue`  
 
-## Devices configuration 
+### Devices configuration 
 
-Change the devices configuration to use the following: 
+The configuration of devices leaf 1 and leaf 2 (border leaves) and host 1 (external router or border leaf of a remote data center) need to be updated.  
+Change their configuration to use the following: 
 
-### leaf 1
+#### leaf 1
 ```
 interface Ethernet5
    description host1 (external-router or remote-dc-border-leaf)
@@ -57,7 +58,7 @@ router bgp 65001
          neighbor 100.0.0.1 activate
 ```
 
-### leaf 2 
+#### leaf 2 
 ```
 interface Ethernet5
    description host1 (external-router or remote-dc-border-leaf)
@@ -83,7 +84,7 @@ router bgp 65001
          neighbor 100.0.0.3 activate
 ```
 
-### host1 
+#### host1 
 ```
 vrf instance tenant-blue
 ip routing vrf tenant-blue 
