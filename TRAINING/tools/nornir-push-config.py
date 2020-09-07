@@ -71,7 +71,7 @@ if args.action == "push":
     else:
         print(f"ERROR : Bad lab")
 elif args.action == "reset":
-    conf_file="init_IP_connectivity.eos"
+    conf_file="init_conf_ADC.eos"
     result_spine=spine.run(task=device_replace_conf,configuration=conf_file)
     print_result(result_spine)
     result_leaf=leaf.run(task=device_replace_conf,configuration=conf_file)
