@@ -10,9 +10,45 @@ VLAN60 (S5) is stretched across all VTEPs with VNI to VLAN mapping
 
 ## Instructions 
 
-Replace the current devices configuration with the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
+We will use the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting).  
+Note: The configuration files are not correct. So the lab wont work. The purpose of this lab is to practice EVPN-VXLAN troubleshooting.  
 
-Note: The configuration files are not correct
+
+Option A:  
+- ssh each device. Then: 
+  - Run this command: `#configure replace flash:init_conf_ADC.eos` 
+  - then copy and paste the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
+
+Option B: 
+- ssh the ATD jump host 
+```
+*****************************************
+*****Jump Host for Arista Test Drive*****
+*****************************************
+
+
+==========Main Menu==========
+
+Please select from the following options: 
+1. Reset All Devices to Base ATD (reset)
+2. MLAG Lab (mlag)
+3. BGP Lab (bgp)
+4. VXLAN Lab (vxlan) excludes leaf3 instead of leaf4
+5. EVPN Type 2 Lab (l2evpn) excludes leaf3 instead of leaf4
+6. EVPN Type 5 Lab (l3evpn) excludes leaf3 instead of leaf4
+7. CVP lab (cvp)
+
+
+97. Additional Labs (labs)
+98. SSH to Devices (ssh)
+99. Exit LabVM (quit/exit) - CTRL + c
+
+What would you like to do?: 
+```
+and select the option `1` (Reset All Devices to Base ATD) 
+- then ssh each device and copy and paste the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
+
+
 
 ## Run the following tests
 
