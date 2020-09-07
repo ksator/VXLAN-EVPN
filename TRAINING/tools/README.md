@@ -13,8 +13,9 @@
 ## Requirements
 
 - python3 installed
+- clone the repository 
 - create virtualenv in `tools` directory : 
-  - `cd tools`
+  - `cd VXLAN-EVPN/TRAINING/tools/`
   - `virtualenv venv`
 - activate virtualenv : `source venv/bin/activate`
 - install requirements : `pip install -r requirements.txt`
