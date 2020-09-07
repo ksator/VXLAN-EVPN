@@ -6,7 +6,7 @@ import os
 
 def main():
     driver = napalm.get_network_driver("eos")
-    list_devices = {"leaf1":"192.168.122.12","leaf2":"192.168.122.13","leaf3":"192.168.122.14","leaf4":"192.168.122.15","spine1":"192.168.122.10","spine2":"192.168.122.11","host1":"192.168.122.16","host2":"192.168.122.17"}
+    list_devices = {"leaf1":"192.168.0.12","leaf2":"192.168.0.13","leaf3":"192.168.0.14","leaf4":"192.168.0.15","spine1":"192.168.0.10","spine2":"192.168.0.11","host1":"192.168.0.16","host2":"192.168.0.17"}
     USER="admin"
     PASSWORD="arista"
     for host,ip in list_devices.items():
