@@ -13,6 +13,42 @@
 ## Requirements
 
 - open a shell session on the ATD jump host 
+```
+
+*****************************************
+*****Jump Host for Arista Test Drive*****
+*****************************************
+
+
+==========Device SSH Menu==========
+
+Screen Instructions:
+
+* Select specific screen - Ctrl + a <number>
+* Select previous screen - Ctrl + a p
+* Select next screen - Ctrl + a n
+* Exit all screens (return to menu) - Ctrl + a \
+
+Please select from the following options:
+1. host1 (host1)
+2. host2 (host2)
+3. leaf1 (leaf1)
+4. leaf2 (leaf2)
+5. leaf3 (leaf3)
+6. leaf4 (leaf4)
+7. spine1 (spine1)
+8. spine2 (spine2)
+9. cvx01 (cvx01)
+
+Other Options: 
+96. Screen (screen) - Opens a screen session to each of the hosts
+97. Back to Previous Menu (back)
+98. Shell (shell/bash)
+99. Back to Main Menu (main/exit) - CTRL + c
+
+What would you like to do? 98
+arista@devbox:~$ 
+```
 - python3 is installed
 ```
 arista@devbox:~$ python3 -V
