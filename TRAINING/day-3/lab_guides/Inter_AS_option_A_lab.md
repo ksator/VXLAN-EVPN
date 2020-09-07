@@ -22,8 +22,14 @@ In this scenario:
 
 ## Instructions 
 
-load S-IRB configuration on the devices.   
-Verify it works.  
+load S-IRB configuration on the devices.  
+- Refer to the S-IRB lab guide and solution directory to quickly set it up.  
+
+Verify it works:  
+```
+leaf2#sh ip route vrf tenant-blue 
+host2#ping vrf vlan50 ip 10.0.40.1 source 10.0.50.2
+```
 
 Then: 
 - in each IP VRF, we will create an EBGP session between local border leaves and the external router (or the border leaf of a remote data center), with the address family IPv4.  
