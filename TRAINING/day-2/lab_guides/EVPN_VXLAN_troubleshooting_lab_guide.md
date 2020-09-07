@@ -11,7 +11,10 @@ VLAN60 (S5) is stretched across all VTEPs with VNI to VLAN mapping
 ## Instructions 
 
 We will use the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting).  
+There are many ways to do it. See below options.  
+
 Note: The configuration files are not correct. So the lab wont work. The purpose of this lab is to practice EVPN-VXLAN troubleshooting.  
+
 
 
 Option A:  
@@ -48,6 +51,10 @@ What would you like to do?:
 and select the option `1` (Reset All Devices to Base ATD) 
 - then ssh each device and copy and paste the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
 
+Option C:
+- open a shell session on the ATD jump host
+- run this command `python nornir-push-config.py --action reset` 
+- then ssh each device and copy and paste the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
 
 
 ## Run the following tests
