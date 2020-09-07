@@ -41,6 +41,8 @@ Change their configuration to use the following:
 
 #### leaf 1
 ```
+vlan 120 
+!
 interface Ethernet5
    description host1 (external-router or remote-dc-border-leaf)
    no switchport
@@ -51,6 +53,10 @@ interface Ethernet5.1234
    vrf tenant-blue
    ip address 100.0.0.0/31
 !
+interface Vlan120
+   vrf tenant-blue
+   ip address 10.0.120.0/31
+!
 router bgp 65001
    vrf tenant-blue
       rd 123.1.1.3:12345
@@ -60,13 +66,19 @@ router bgp 65001
       router-id 123.1.1.3
       neighbor 100.0.0.1 remote-as 65101
       neighbor 100.0.0.1 maximum-routes 12000
+      neighbor 10.0.120.1 remote-as 65001
+      neighbor 10.0.120.1 next-hop-self
+      neighbor 10.0.120.1 maximum-routes 12000
       !
       address-family ipv4
          neighbor 100.0.0.1 activate
+         neighbor 10.0.120.1 activate
 ```
 
 #### leaf 2 
 ```
+vlan 120 
+!
 interface Ethernet5
    description host1 (external-router or remote-dc-border-leaf)
    no switchport
@@ -77,6 +89,10 @@ interface Ethernet5.1234
    vrf tenant-blue
    ip address 100.0.0.2/31
 !
+interface Vlan120
+   vrf tenant-blue
+   ip address 10.0.120.1/31
+!
 router bgp 65001
    vrf tenant-blue
       rd 123.1.1.4:12345
@@ -86,9 +102,13 @@ router bgp 65001
       router-id 123.1.1.4
       neighbor 100.0.0.3 remote-as 65101
       neighbor 100.0.0.3 maximum-routes 12000
+      neighbor 10.0.120.0 remote-as 65001
+      neighbor 10.0.120.0 next-hop-self
+      neighbor 10.0.120.0 maximum-routes 12000
       !
       address-family ipv4
          neighbor 100.0.0.3 activate
+         neighbor 10.0.120.0 activate
 ```
 
 #### host1 
