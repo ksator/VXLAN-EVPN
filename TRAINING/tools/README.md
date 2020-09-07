@@ -81,7 +81,7 @@ nornir            2.4.0
   - ISIS use case : `python nornir-push-config.py --action push --lab infra --option isis`
   - eBGP use case : `python nornir-push-config.py --action push --lab infra --option ebgp`
 - Push a specific EVPN use case :
-  - L2VPN : `python nornir-push-config.py --action push --l2vpn --option l2`
-  - IRB-A : `python nornir-push-config.py --action push --l2vpn --option irb-a`
-  - IRB-S : `python nornir-push-config.py --action push --l2vpn --option irb-s`
-  - L3VPN : `python nornir-push-config.py --action push --l3vpn --option option-a`
+  - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2`
+  - IRB-A : `python nornir-push-config.py --action push --lab l2vpn --option irb-a`
+  - IRB-S : `python nornir-push-config.py --action push --lab l2vpn --option irb-s`
+  - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a`
