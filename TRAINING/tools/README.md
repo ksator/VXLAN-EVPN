@@ -20,7 +20,7 @@ Python 3.8.1
 arista@devbox:~$ python -V
 Python 3.8.1
 ```
-- clone the repository ('git clone https://github.com/krikoon73/VXLAN-EVPN.git')
+- clone the repository (`git clone https://github.com/krikoon73/VXLAN-EVPN.git`)
 - create virtualenv in `tools` directory : 
   - `arista@devbox:~$ cd VXLAN-EVPN/TRAINING/tools/`
   - `arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python -m virtualenv venv`
