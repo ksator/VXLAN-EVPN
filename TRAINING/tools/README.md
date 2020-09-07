@@ -62,12 +62,16 @@ Python 3.8.1
   - `arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python -m virtualenv venv`
 - activate virtualenv : `source venv/bin/activate`
 - install requirements : `pip install -r requirements.txt`
-- verify 
+- verify the requirements in the virtual env
 ```
 (venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ pip list | grep 'napalm\|netmiko\|nornir'
 napalm            2.5.0
 netmiko           2.4.2
 nornir            2.4.0
+```
+- test 
+```
+(venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python napalm-get-facts.py 
 ```
 
 ## how to use ?
