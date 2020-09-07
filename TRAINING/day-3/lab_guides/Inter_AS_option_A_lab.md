@@ -20,16 +20,18 @@ In this scenario:
   - or a border leaf in a remote datacenter (in that case there are 2 DC in total).    
 - so the leaves 1 and 2 are border leaves. 
 
-Instructions: 
+## Instructions: 
 
-load S-IRB configuration. 
+load S-IRB configuration on the devices.  
 
-`tenant-blue` is an IP VRF. We will use one vlan tag for each IP VRF. The vlan tag `1234` will be used for the IP VRF `tenant-blue`
+We will use one vlan tag for each IP VRF.  
+`tenant-blue` is an IP VRF. The vlan tag `1234` will be used for the IP VRF `tenant-blue`  
 
+## Devices configuration 
 
+Change the devices configuration to use the following: 
 
-
-leaf 1  configuration 
+### leaf 1
 ```
 interface Ethernet5
    description host1 (external-router or remote-dc-border-leaf)
@@ -55,7 +57,7 @@ router bgp 65001
          neighbor 100.0.0.1 activate
 ```
 
-leaf 2 configuration
+### leaf 2 
 ```
 interface Ethernet5
    description host1 (external-router or remote-dc-border-leaf)
@@ -81,7 +83,7 @@ router bgp 65001
          neighbor 100.0.0.3 activate
 ```
 
-host1 configuration
+### host1 
 ```
 vrf instance tenant-blue
 ip routing vrf tenant-blue 
@@ -134,9 +136,11 @@ router bgp 65101
          neighbor 100.0.0.0 activate
 ```
 
-Verifications: 
+## Verifications  
 
-Run the following commands on host 1 (external router or remote border leaf):  
+### Run the following commands on host 1 
+
+Host 1 is an external router or a remote border leaf
 ```
 host1#sh lldp neighb ethernet 3
 host1#sh ip interface vrf tenant-blue brief 
@@ -145,16 +149,19 @@ host1#sh ip route vrf tenant-blue bgp
 host1#sh ip bgp vrf tenant-blue
 ```
 ECMP is working.  
-BGP sessions are established. 
-You should see some hosts (ip/32 of host 2) 
-You should see the prefixes of the fabric (int vlan/24 in vrf tenant-blue) 
-``
-host1#ping vrf tenant-blue 10.0.50.2 source 200.1.0.1
+BGP sessions are established.  
+You should see some hosts (ip/32 of host 2)  
+You should see the prefixes of the fabric (int vlan ip/24 in vrf tenant-blue)  
 ```
-PING is working. The connectivity between the 2 DC is working.  
+host1#ping vrf tenant-blue 10.0.50.2 source 200.1.0.1
+``` 
 
+PING is working. The connectivity between the 2 DC is working.   
 
-Run the following commands on leaf 1 (local border leaf): 
+### Run the following commands on leaf 1 
+
+leaf 1 is a local border leaf 
+
 ```
 leaf1#sh lldp neighb ethernet 5
 leaf1#sh vrf tenant-blue 
@@ -180,7 +187,10 @@ leaf1#sh bgp evpn route-type ip-prefix 200.1.0.0/24
 leaf1#sh bgp neighbors 123.1.1.1 evpn advertised-routes route-type ip-prefix 200.2.0.0/24
 ```
 
-Run the following commands on leaf3 or leaf4
+### Run the following commands on leaf3 or leaf4
+
+leaf3 and leaf4 are regular leaves (i.e to attach servers)  
+
 ```
 leaf3#sh bgp neighbors 123.1.1.2 evpn received-routes route-type ip-prefix 200.1.0.0/24
 leaf3#sh bgp evpn route-type ip-prefix 200.1.0.0/24 detail
@@ -190,19 +200,19 @@ leaf3#sh ip route vrf tenant-blue 200.2.0.0/24 bgp
 leaf3#sh ip route vrf tenant-blue 0.0.0.0 
 leaf3#sh ip route vrf tenant-blue bgp 
 ```
-So leaf 3 and leaf 4 have routes to host 1 (external router or border leaf of a remote data center). 
-leaf 3 and leaf 4 learnt routes advertised by host 1 
+So leaf 3 and leaf 4 have routes to host 1 (external router or border leaf of a remote data center).  
+leaf 3 and leaf 4 learnt routes advertised by host 1  
 
-host 1 advertised IPv4 routes to leaf 1 and leaf 2. Then leaf 1 and leaf 2 generated and advertised equivalents RT5. 
+host 1 advertised IPv4 routes to leaf 1 and leaf 2. Then leaf 1 and leaf 2 generated and advertised equivalents RT5.  
 
+### Run the following commands on host 2 
 
+host 2 is a local sever. 
 
-Run the following commands on host 2 
 ```
 host2#ping vrf vlan60 200.2.0.1 source 10.0.60.2
 host2#ping vrf vlan50 200.1.0.1 source 10.0.50.2
 ```
-so host 2 can reach addresses behing host 1
-host 2 is a local server. 
-host 1 is an external router connected to local border leaves. or host 1 is a border leaf in a remote data center.  
-ip connectivity between these 2 sites is working.  
+so host 2 can reach addresses behing host 1.  
+host 1 is an external router connected to local border leaves. or host 1 is a border leaf in a remote data center.   
+ip connectivity between these 2 sites is working.   
