@@ -22,10 +22,17 @@ In this scenario:
 
 ## Instructions 
 
-load S-IRB configuration on the devices.  
+load S-IRB configuration on the devices.   
+Verify it works.  
 
-We will use one vlan tag for each IP VRF: 
-- `tenant-blue` is an IP VRF. The vlan tag `1234` will be used for the IP VRF `tenant-blue`  
+Then: 
+- in each IP VRF, we will create an EBGP session between local border leaves and the external router (or the border leaf of a remote data center), with the address family IPv4.  
+  - leaf 1 <-> host 1
+  - leaf 2 <-> host 1
+- in each IP VRF, we will add an IBGP session between each local border leaf, with the address family IPv4. 
+  - leaf 1 <-> leaf 2
+- We will use one vlan tag for each IP VRF: 
+  - `tenant-blue` is an IP VRF. The vlan tag `1234` will be used for the IP VRF `tenant-blue`  
 
 ### Devices configuration 
 
@@ -172,6 +179,7 @@ leaf1#ping vrf tenant-blue 100.0.0.1 source 100.0.0.0
 leaf1#sh ip bgp summary vrf tenant-blue
 leaf1#sh bgp neighbors 100.0.0.1 vrf tenant-blue
 ```
+BGP sessions are established.  
 ```
 leaf1#sh ip route vrf tenant-blue bgp
 leaf1#sh ip route vrf tenant-blue bgp next-hop 100.0.0.1
@@ -179,14 +187,17 @@ leaf1#sh ip route vrf tenant-blue 200.1.0.0/24 bgp
 leaf1#sh ip route vrf tenant-blue 200.2.0.0/24 bgp 
 leaf1#sh ip route vrf tenant-blue 0.0.0.0 
 ```
+leaf 1 is learning BGP routes (IPv4) from host 1.  
 ```
 leaf1#sh ip bgp vrf tenant-blue
 leaf1#sh ip bgp 200.1.0.0/24 vrf tenant-blue 
 ```
+leaf 1 generated and advertised equivalent EVPN RT5  
 ```
 leaf1#sh bgp evpn route-type ip-prefix 200.1.0.0/24 
 leaf1#sh bgp neighbors 123.1.1.1 evpn advertised-routes route-type ip-prefix 200.2.0.0/24
 ```
+so the other leaves of the fabric have routes to the external router host 1 (using VXLAN encapsulation to VTEP leaf 1 and leaf 2). 
 
 ### Run the following commands on leaf3 or leaf4
 
