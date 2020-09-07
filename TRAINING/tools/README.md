@@ -12,13 +12,27 @@
 
 ## Requirements
 
-- python3 installed
-- clone the repository 
+- open a shell session on the ATD jump host 
+- python3 is installed
+```
+arista@devbox:~$ python3 -V
+Python 3.8.1
+arista@devbox:~$ python -V
+Python 3.8.1
+```
+- clone the repository ('git clone https://github.com/krikoon73/VXLAN-EVPN.git')
 - create virtualenv in `tools` directory : 
-  - `cd VXLAN-EVPN/TRAINING/tools/`
-  - `virtualenv venv`
+  - `arista@devbox:~$ cd VXLAN-EVPN/TRAINING/tools/`
+  - `arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python -m virtualenv venv`
 - activate virtualenv : `source venv/bin/activate`
 - install requirements : `pip install -r requirements.txt`
+- verify 
+```
+(venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ pip list | grep 'napalm\|netmiko\|nornir'
+napalm            2.5.0
+netmiko           2.4.2
+nornir            2.4.0
+```
 
 ## how to use ?
 
