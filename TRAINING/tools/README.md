@@ -2,13 +2,13 @@
 
 ## Description
 
-- normir-push-config.py : script for resetting the initilal IP connectivity previously backuped on the device in flash (flash:init_IP_connectivity.eos) or merging a configuration of the lab
-- config.xml : nornir initialization file
-- group.xml : nornir group initialization file
-- inventory.xml : nornir inventory initialization file
+- [nornir-push-config.py](nornir-push-config.py) : script for resetting the initilal IP connectivity previously backuped on the device in flash (flash:init_IP_connectivity.eos) or merging a configuration of the lab
+- [config.yml](config.yml) : nornir initialization file
+- [groups.yml](group.yml) : nornir group initialization file
+- [inventory.yml](inventory.yml) : nornir inventory initialization file
   - devices list ==> **IP address for management should be adapted in order to stick to your lab** 
   - pointers to lab configurations in the data section
-- napalm-get-facts : script example for getting sample facts from the devices (warning : this is not using the napalm inventory)
+- [napalm-get-facts.py](napalm-get-facts.py) : script example for getting sample facts from the devices (warning : this is not using the napalm inventory)
 
 ## Requirements
 
