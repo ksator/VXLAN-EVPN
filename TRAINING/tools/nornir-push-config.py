@@ -27,7 +27,8 @@ def device_replace_conf(task,configuration):
 parser = argparse.ArgumentParser()
 parser.add_argument("-action","--action",help="\'push\' or \'reset\' to initial configuration")
 parser.add_argument("-lab","--lab",help="\'infra\' or \'l2vpn\' or \'l3vpn\'")
-parser.add_argument("-option","--option",help="\'isis\' or \'ebgp\' for infra \'lab\', \'l2\' or \'irb-a\' or \'irb-b\' for \'l2vpn\', \'option-a\' for l3vpn")
+parser.add_argument("-underlay","--underlay",help="\'isis\' or \'ebgp\")
+parser.add_argument("-option","--option",help="\'l2\' or \'irb-a\' or \'irb-b\' for \'l2vpn\', \'option-a\' for l3vpn")
 args = parser.parse_args()
 
 # Initialize nornir Filter
@@ -42,32 +43,34 @@ print(args.lab)
 print(args.option)
 
 if args.action == "push":
-    if args.lab == "infra":
-        if args.option == "isis":
-            result_spine=spine.run(task=device_merge_conf,configuration=args.option)
+    if args.lab == "underlay":
+        if args.underlay == "isis" or args.underlay == "ebgp":
+            config_name = args.underlay
+            result_spine=spine.run(task=device_merge_conf,configuration=config_name)
             print_result(result_spine)
-            result_leaf=leaf.run(task=device_merge_conf,configuration=args.option)
-            print_result(result_leaf)
-        elif args.option == "ebgp":
-            result_spine=spine.run(task=device_merge_conf,configuration=args.option)
-            print_result(result_spine)
-            result_leaf=leaf.run(task=device_merge_conf,configuration=args.option)
+            result_leaf=leaf.run(task=device_merge_conf,configuration=config_name)
             print_result(result_leaf)
         else:
-            print('ERROR : Bad option')
+            print('ERROR : Bad underlay')
     elif args.lab == "l2vpn":
-        if args.option == "l2":
-            result_leaf=leaf.run(task=device_merge_conf,configuration=args.option)
-            print_result(result_leaf)
-        elif args.option == "irb-s":
-            result_leaf=leaf.run(task=device_merge_conf,configuration=args.option)
-            print_result(result_leaf)
+        if args.underlay == "ebgp" or args.underlay == "ebgp":
+            if args.option == "l2" or args.option == "irb-a" or args.option == "irb=s"
+                config_name = args.underlay+"-"+args.option
+                result_leaf=leaf.run(task=device_merge_conf,configuration=config_name)
+                print_result(result_leaf)
+            else:
+                print(f"Lab {args.lab} eith {args.option} is not yet implemented for {args.underlay} ")
         else:
-            print(f"Lab \'{args.lab}\ \`{args.option}\`)' is not yet implemented")
+            print('ERROR : Bad underlay')
     elif args.lab == "l3vpn":
-        if args.option == "option-a":
-            result_leaf=leaf.run(task=device_merge_conf,configuration=args.option)
-            print_result(result_leaf)
+        if args.underlay == "ebgp" or args.underlay == "ebgp":
+            if args.option == "option-a":
+                result_leaf=leaf.run(task=device_merge_conf,configuration=config_name)
+                print_result(result_leaf)
+            else:
+                print(f"Lab {args.lab} eith {args.option} is not yet implemented for {args.underlay} ")
+        else:
+            print('ERROR : Bad underlay')
     else:
         print(f"ERROR : Bad lab")
 elif args.action == "reset":
