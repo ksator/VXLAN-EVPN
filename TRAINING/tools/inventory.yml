@@ -9,7 +9,7 @@ leaf1:
     - ADC
   data:
     role: leaf
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/leaf1_ADC_day1_solution_ISIS.eos"
@@ -32,7 +32,7 @@ leaf2:
     - ADC
   data:
     role: leaf
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/leaf2_ADC_day1_solution_ISIS.eos"
@@ -55,7 +55,7 @@ leaf3:
     - ADC
   data:
     role: leaf
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/leaf3_ADC_day1_solution_ISIS.eos"
@@ -78,7 +78,7 @@ leaf4:
     - ADC
   data:
     role: leaf
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/leaf4_ADC_day1_solution_ISIS.eos"
@@ -101,7 +101,7 @@ spine1:
     - ADC
   data:
     role: spine
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/spine1_ADC_day1_solution_ISIS.eos"
@@ -116,7 +116,7 @@ spine2:
     - ADC
   data:
     role: spine
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/spine2_ADC_day1_solution_ISIS.eos"
@@ -131,7 +131,7 @@ host1:
     - ADC
   data:
     role: host
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/host1_ADC_day1_solution_ISIS.eos"
@@ -146,7 +146,7 @@ host2:
     - ADC
   data:
     role: host
-    site: OVH-LAB
+    site: ADC-LAB
     type: network_device
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/host2_ADC_day1_solution_ISIS.eos"

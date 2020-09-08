@@ -4,4 +4,4 @@ global:
         domain: ns311916.ip-188-165-211.eu
 ADC:
     data:
-        location: OVH-LAB
+        location: ADC-LAB
