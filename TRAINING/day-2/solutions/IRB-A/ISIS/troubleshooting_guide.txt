@@ -1,0 +1,44 @@
+### the basics 
+
+on leaf3 
+
+sh ip int brief 
+sh ip virtual-router
+
+sh vlan
+sh bgp evpn instance 
+
+sh vxlan vni
+sh vxlan flood vtep 
+
+sh int vxlan1
+
+sh bgp evpn route-type imet vni 25 detail 
+
+sh vxlan config-sanity
+
+### routing
+
+on host2: 
+ping vrf vlan25 ip 10.0.20.1 source 10.0.25.2
+
+leaf3 and leaf4:  
+show lldp neighbors | grep host2
+sh mac address-table addr 001c.734b.97ec vlan 25
+
+leaf 3 or leaf 4 (the one that has an arp entree for host2) 
+sh ip arp 10.0.25.2 interface vlan 25
+sh bgp neighbors 123.1.1.2 evpn advertised-routes route-type mac-ip 001c.734b.97ec vni 25
+sh bgp neighbors 123.1.1.2 evpn advertised-routes route-type mac-ip 001c.734b.97ec vni 25 detail
+
+leaf1 and leaf 2: 
+sh bgp evpn route-type mac-ip  001c.734b.97ec vni 25
+sh bgp evpn route-type mac-ip  001c.734b.97ec vni 25 detail
+sh bgp evpn next-hop 2.2.2.2 
+sh vxlan address-table vlan 25 
+sh mac address-table addr 001c.734b.97ec vlan 25
+sh ip arp remote 
+
+
+
+

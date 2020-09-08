@@ -1,0 +1,27 @@
+!
+vrf instance tenant-green
+!
+interface Ethernet5
+   description host1-l3vpn
+   no switchport
+   no shutdown
+   vrf tenant-green
+   ip address 100.0.0.0/31
+!
+ip routing vrf tenant-green
+!
+interface Vxlan1
+   vxlan vrf tenant-green vni 8888
+!
+router bgp 65000
+   vrf tenant-green
+      rd 123.1.1.3:8888
+      route-target import evpn 8888:8888
+      route-target export evpn 8888:8888
+      router-id 123.1.1.3
+      neighbor 100.0.0.1 remote-as 4545
+      neighbor 100.0.0.1 local-as 5454 no-prepend replace-as
+      neighbor 100.0.0.1 maximum-routes 12000
+      !
+      address-family ipv4
+         neighbor 100.0.0.1 activate

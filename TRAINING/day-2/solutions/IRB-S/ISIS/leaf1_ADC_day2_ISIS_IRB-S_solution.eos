@@ -1,0 +1,48 @@
+!
+ip virtual-router mac-address aaaa.bbbb.cccc
+!
+vrf instance tenant-blue
+!
+vlan 40,45,60,1515
+!
+interface vxlan 1
+   vxlan vlan 40 vni 40
+   vxlan vlan 45 vni 45
+   vxlan vlan 60 vni 60
+   vxlan vrf tenant-blue vni 12345
+   !
+interface Vlan40
+   vrf tenant-blue
+   ip address virtual 10.0.40.254/24
+   !
+interface Vlan45
+   vrf tenant-blue
+   ip address virtual 10.0.45.254/24
+   !
+interface Vlan60
+   vrf tenant-blue
+   ip address virtual 10.0.60.254/24
+   !
+interface Vlan1515
+   vrf tenant-blue
+   ip address 223.255.255.1/24
+!
+router bgp 65000
+    vlan 40
+        rd 123.1.1.3:40
+        route-target both 40:40
+        redistribute learned
+    vlan 45
+        rd 123.1.1.3:45
+        route-target both 45:45
+        redistribute learned
+    vlan 60
+        rd 123.1.1.3:60
+        route-target both 60:60
+        redistribute learned
+    vrf tenant-blue
+       rd 123.1.1.3:12345
+       route-target both 12345:12345
+       redistribute connected
+!
+ip routing vrf tenant-blue

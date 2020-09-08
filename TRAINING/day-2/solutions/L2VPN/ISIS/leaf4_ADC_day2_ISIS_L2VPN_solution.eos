@@ -2,7 +2,7 @@
 vlan 10
 vlan 15
 !
-router bgp 65002
+router bgp 65000
    vlan 10
   	rd 123.1.1.6:10
   	route-target both 10:10

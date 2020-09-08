@@ -1,0 +1,55 @@
+!
+vrf instance tenant-green
+!
+vlan 2002
+!
+vlan 100
+!
+interface Loopback100
+   vrf tenant-green
+   ip address 100.100.100.3/32
+!
+interface Vlan2002
+   vrf tenant-green
+   ip address 101.101.101.1/31
+!
+interface Vlan100
+   vrf tenant-green
+   ip address virtual 100.100.0.254/24
+!
+ip routing vrf tenant-green
+!
+interface Vxlan1
+   vxlan vrf tenant-green vni 8888
+!
+ip prefix-list tenant-green seq 10 permit 200.3.0.0/24
+!
+!ip prefix-list tenant-green-ibgp seq 10 permit 100.100.100.3/24
+ip prefix-list tenant-green-ibgp seq 10 permit 100.100.100.0/24 le 32
+!
+route-map filter-tenant-green permit 10
+   match ip address prefix-list tenant-green
+!
+route-map redistribute-tenant-green permit 10
+   match ip address prefix-list tenant-green-ibgp
+!
+router bgp 65000
+   vrf tenant-green
+      rd 123.1.1.5:8888
+      route-target import evpn 8888:8888
+      route-target export evpn 8888:8888
+      !router-id 123.1.1.6
+      router-id 123.1.1.5
+      neighbor 100.100.0.2 remote-as 4545
+      neighbor 100.100.0.2 local-as 5454 no-prepend replace-as
+      neighbor 100.100.0.2 update-source Loopback100
+      neighbor 100.100.0.2 route-map filter-tenant-green in
+      neighbor 100.100.0.2 maximum-routes 12000
+      neighbor 101.101.101.0 remote-as 65002
+      neighbor 101.101.101.0 next-hop-self
+      neighbor 101.101.101.0 maximum-routes 12000
+      redistribute connected route-map redistribute-tenant-green
+      !
+      address-family ipv4
+         neighbor 100.100.0.2 activate
+         neighbor 101.101.101.0 activate
