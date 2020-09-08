@@ -1,5 +1,7 @@
 hostname leaf1
 !
+service routing protocols model multi-agent
+!
 vlan 4094
    trunk group mlag-peer
 !

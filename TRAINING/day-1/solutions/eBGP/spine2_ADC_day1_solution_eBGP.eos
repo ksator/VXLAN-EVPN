@@ -1,5 +1,7 @@
 hostname spine2
 !
+service routing protocols model multi-agent
+!
 interface Ethernet2
    description leaf1
    mtu 9100
