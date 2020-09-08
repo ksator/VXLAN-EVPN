@@ -63,6 +63,7 @@ router bgp 65000
    neighbor overlay-leaf-sessions update-source Loopback0
    neighbor overlay-leaf-sessions ebgp-multihop 2
    neighbor overlay-leaf-sessions send-community extended
+   neighbor overlay-leaf-sessions route-reflector-client
    neighbor overlay-leaf-sessions maximum-routes 0
    !
    address-family evpn

@@ -37,16 +37,55 @@
 * Copy all these configurations to the boxes.
 * Save the new configuration for later purposes or mistakes : **`copy running-config flash:init_IP_connectivity.eos`**
 
-## Use case 1 : EVPN configuration guide (**under development**)
+## Lab 1 : EVPN configuration guide (**under development**) with ISIS Underlay and iBGP overlay
 
-1. Underlay - ISIS
+Note : this lab has few instructions compared to Lab 2. It requires more EOS knowledge but still easy ;-)
+
+![lab-topology-isis.png](lab-topology-isis.png)
+
+1. Underlay - ISIS for underlay
+
+   On spines and leaves
+   1. use the following net format 49.0001.ABCD.00 where A.B.C.D is a pre defined loopback
+   2. level-2 area
+   3. is-hostname <hostname>
+   4. Activate multipathing for ipv4 family
+   5. Enable isis on interfaces
+   6. Check isis and routing table : which routes should you see ?
+      1. `show isis database`
+      2. `show isis neighbor`
+      3. `show ip route`
+
+2. Overlay - iBGP for overlay
+
    1. On spines
-   2. On leafs
-2. Overlay - iBGP
-   1. On spines
+      1. Allocate the right `router-id`
+      2. Use `peer-filter` and `listen range` knob for simplyfying the neighboring to leafs
+      3. Activate multi-pathing
+      4. Define them as `route-reflector`
+      5. Use the following `peer group`  : overlay-leaf-session
+      6. De-activate globally the automatic neighboring in ipv4
+      7. Do they need to send community ? Which one ?
+      8. Multihop or not multihop ?
+      9. What else for a `peer group` ?
+      10. Do you need to activate specific `address-family` ?
+      11. Check bgp
+          1. `show bgp evpn summary`
+
    2. On leaves
+      1. Allocate the right `router-id`
+      2. Activate multi-pathing
+      3. Use the following `peer group`  : overlay-leaf-session
+      4. Associate the neighbor with the `peer group` - which ones ?
+      5. De-activate globally the automatic neighboring in ipv4
+      6. Do they need to send community ? Which one ?
+      7. Multihop or not multihop ?
+      8. What else for a `peer group` ?
+      9. Do you need to activate specific `address-family` ?
+      10. Check bgp
+          1. `show bgp evpn summary`
 
-## Use case 2 : EVPN Configuration steps
+## Lab 2 : EVPN Configuration steps with eBGP for underlay and overlay
 
 1. Underlay view - eBGP
 ![eBGP-underlay.png](eBGP-underlay.png)
