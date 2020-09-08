@@ -65,8 +65,8 @@ leaf3:
     ebgp-irb-s: "../day-2/solutions/IRB-S/eBGP/leaf3_ADC_day2_eBGP_IRB-S_solution.eos"
     ebgp-option-a: "../day-3/solutions/eBGP/leaf3_ADC_day3_eBGP_L3VPN_solution.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf3_ADC_day2_ISIS_L2VPN_solution.eos"
-    isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf3_ADC_ISIS_day2_IRB-A_solution.eos"
-    isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf3_ADC_ISIS_day2_IRB-S_solution.eos"
+    isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf3_ADC_day2_ISIS_IRB-A_solution.eos"
+    isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf3_ADC_day2_ISIS_IRB-S_solution.eos"
     isis-option-a: "../day-3/solutions/ISIS/leaf3_ADC_day3_ISIS_L3VPN_solution.eos"
 leaf4:
   hostname: 192.168.0.15
@@ -89,7 +89,7 @@ leaf4:
     ebgp-option-a: "../day-3/solutions/eBGP/leaf4_ADC_day3_eBGP_L3VPN_solution.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf4_ADC_day2_ISIS_L2VPN_solution.eos"
     isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf4_ADC_day2_ISIS_IRB-A_solution.eos"
-    isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf14_ADC_day2_ISIS_IRB-S_solution.eos"
+    isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf4_ADC_day2_ISIS_IRB-S_solution.eos"
     isis-option-a: "../day-3/solutions/ISIS/leaf1_ADC_day3_ISIS_L3VPN_solution.eos"
 spine1:
   hostname: 192.168.0.10
