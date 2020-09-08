@@ -1,0 +1,18 @@
+!
+vlan 10
+vlan 15
+!
+router bgp 65002
+   vlan 10
+  	rd 123.1.1.5:10
+  	route-target both 10:10
+  	redistribute learned
+!
+   vlan 15
+  	rd 123.1.1.5:15
+  	route-target both 15:15
+  	redistribute learned
+!
+interface Vxlan1
+	vxlan vlan 10 vni 10
+ 	vxlan vlan 15 vni 15

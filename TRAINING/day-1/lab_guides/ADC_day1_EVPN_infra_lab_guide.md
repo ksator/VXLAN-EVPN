@@ -60,16 +60,15 @@ Note : this lab has few instructions compared to Lab 2. It requires more EOS kno
 
    1. On spines
       1. Allocate the right `router-id`
-      2. Use `peer-filter` and `listen range` knob for simplyfying the neighboring to leafs
-      3. Activate multi-pathing
-      4. Define them as `route-reflector`
-      5. Use the following `peer group`  : overlay-leaf-session
-      6. De-activate globally the automatic neighboring in ipv4
-      7. Do they need to send community ? Which one ?
-      8. Multihop or not multihop ?
-      9. What else for a `peer group` ?
-      10. Do you need to activate specific `address-family` ?
-      11. Check bgp
+      2. Activate multi-pathing
+      3. Define them as `route-reflector`
+      4. Use the following `peer group`  : overlay-leaf-session
+      5. De-activate globally the automatic neighboring in ipv4
+      6. Do they need to send community ? Which one ?
+      7. Multihop or not multihop ?
+      8. What else for a `peer group` ?
+      9.  Do you need to activate specific `address-family` ?
+      10. Check bgp
           1. `show bgp evpn summary`
 
    2. On leaves
