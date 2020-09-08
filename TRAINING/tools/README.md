@@ -49,34 +49,43 @@ Other Options:
 What would you like to do? 98
 arista@devbox:~$ 
 ```
+
 - python3 is installed
+
 ```
 arista@devbox:~$ python3 -V
 Python 3.8.1
 arista@devbox:~$ python -V
 Python 3.8.1
 ```
+
+- make sure that your ssh key is added to the repo
 - clone the repository (`git clone https://github.com/krikoon73/VXLAN-EVPN.git`)
 - create virtualenv in `tools` directory : 
+  - `arista@devbox:~$ pip install virtualenv`
   - `arista@devbox:~$ cd VXLAN-EVPN/TRAINING/tools/`
   - `arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python -m virtualenv venv`
 - activate virtualenv : `source venv/bin/activate`
 - install requirements : `pip install -r requirements.txt`
 - verify the requirements in the virtual env
+
 ```
 (venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ pip list | grep 'napalm\|netmiko\|nornir'
 napalm            2.5.0
 netmiko           2.4.2
 nornir            2.4.0
 ```
+
 - test 
+
 ```
 (venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python napalm-get-facts.py 
 ```
 
 ## how to use ?
 
-- Reset connectivity for leaf/spine/host: `python nornir-push-config.py --action reset`
+- Reset connectivity for leaf/spine/host: `python nornir-push-config.py --action reset` 
+  - WARNING : it supposes that the inital IP Connectivity has been saved for all devices 
 - Push EVPN infrastructure :
   - ISIS use case : `python nornir-push-config.py --action push --lab infra --option isis`
   - eBGP use case : `python nornir-push-config.py --action push --lab infra --option ebgp`
