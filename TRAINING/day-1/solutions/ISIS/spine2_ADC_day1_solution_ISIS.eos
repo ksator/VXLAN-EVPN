@@ -52,20 +52,21 @@ router isis UNDERLAY
       maximum-paths 2
       address-family ipv4 unicast
 !
-peer-filter leaf-range
-   10 match as-range 65001-65004 result accept
-!
 router bgp 65000
    router-id 123.1.1.2
    bgp cluster-id 123.1.1.2
    no bgp default ipv4-unicast
    maximum-paths 2 ecmp 2
-   bgp listen range 123.0.0.0/8 peer-group overlay-leaf-sessions peer-filter leaf-range
    neighbor overlay-leaf-sessions peer group
    neighbor overlay-leaf-sessions update-source Loopback0
    neighbor overlay-leaf-sessions ebgp-multihop 2
    neighbor overlay-leaf-sessions send-community extended
    neighbor overlay-leaf-sessions route-reflector-client
+   neighbor overlay-leaf-sessions remote-as 65000
+   neighbor 123.1.1.3 peer group overlay-leaf-sessions
+   neighbor 123.1.1.4 peer group overlay-leaf-sessions
+   neighbor 123.1.1.5 peer group overlay-leaf-sessions
+   neighbor 123.1.1.6 peer group overlay-leaf-sessions
    neighbor overlay-leaf-sessions maximum-routes 0
    !
    address-family evpn
