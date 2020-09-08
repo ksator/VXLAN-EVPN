@@ -2,6 +2,8 @@
 
 Note : need to recompile entirely wireshark because centos repository is containing a very old version of wireshark
 
+- Connect to lab vm thru guacamole
+
 - Install gcc compilator
 
 ```
