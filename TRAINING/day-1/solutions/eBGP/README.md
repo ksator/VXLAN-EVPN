@@ -1,9 +1,5 @@
 # Directory for day-1 solutions based on eBGP underlay and eBGP Overlay
 
-[host1](host1_ADC_day1_solution_eBGP.eos)
-
-[host2](host2_ADC_day1_solution_eBGP.eos)
-
 [leaf1](leaf1_ADC_day1_solution_eBGP.eos)
 
 [leaf2](leaf2_ADC_day1_solution_eBGP.eos)
