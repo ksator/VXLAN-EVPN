@@ -41,13 +41,15 @@
 2. Configure VLAN and trunks
    1. Use diagram to understand what VLANs need to be created
    2. Verify MAC learning and ports
+
 3. Configure MAC-VRF
-   1. VLAN based
+   1. Check the ASN for sure (iBGP or eBGP overlay use case)
+   2. VLAN based
       1. RD should be RID:VNI
       2. RT should be VTEP:VLAN
-   2. Verify Type-3 exchange
-   3. Verify BGP for Type-2 routes
-   4. Verify VXLAN and MAC tables
+   3. Verify Type-3 exchange
+   4. Verify BGP for Type-2 routes
+   5. Verify VXLAN and MAC tables
 
 * Test reachability from Host1 to Host2 and vice versa
 * Test failover by disabling uplink of a leaf pair to Spine
