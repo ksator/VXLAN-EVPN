@@ -43,7 +43,7 @@ print(args.lab)
 print(args.option)
 
 if args.action == "push":
-    if args.lab == "underlay":
+    if args.lab == "infra":
         if args.underlay == "isis" or args.underlay == "ebgp":
             config_name = args.underlay
             result_spine=spine.run(task=device_merge_conf,configuration=config_name)
