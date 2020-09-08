@@ -42,5 +42,5 @@ Then change the configuration of devices leaf 1 and leaf 2 and host 1:
 - In addition to use `redistribute connected` in the IP VRF, we can also use `redistribute static` on the external router (host 1). so we need to add some static routes in the host 1
 - host 1 will be configured with some loopback (/24) in the IP VRF. These routes will be redistributed. And the loopback addresses can be used in PING between host 1 (external router or the border leaf of a remote data center) and host 2 (local server) 
 
-Then please refer to this directory [solutions/Inter_AS_option_A_lab](solutions/Inter_AS_option_A_lab) to see working configuration files and a validation and troubleshooting guide.  
+Then please refer to this directory [../solutions/Inter_AS_option_A_lab](../solutions/Inter_AS_option_A_lab) to see working configuration files and a validation and troubleshooting guide.  
 
