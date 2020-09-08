@@ -85,12 +85,16 @@ nornir            2.4.0
 ## how to use ?
 
 - Reset connectivity for leaf/spine/host: `python nornir-push-config.py --action reset` 
-  - WARNING : it supposes that the inital IP Connectivity has been saved for all devices 
+  - WARNING : it supposes that the inital IP Connectivity has been saved for all devices (see lab guide day-1)
 - Push EVPN infrastructure :
-  - ISIS use case : `python nornir-push-config.py --action push --lab infra --option isis`
-  - eBGP use case : `python nornir-push-config.py --action push --lab infra --option ebgp`
-- Push a specific EVPN use case :
-  - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2`
-  - IRB-A : `python nornir-push-config.py --action push --lab l2vpn --option irb-a`
-  - IRB-S : `python nornir-push-config.py --action push --lab l2vpn --option irb-s`
-  - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a`
+  - ISIS use case : `python nornir-push-config.py --action push --lab infra --underlay isis`
+  - eBGP use case : `python nornir-push-config.py --action push --lab infra --underlay ebgp`
+- Push a specific EVPN use case : please use the righ underlay option based on your infrastructure
+  - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2 --underlay isis`
+  - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2 --underlay ebgp`
+  - IRB-A : `python nornir-push-config.py --action push --lab l2vpn --option irb-a --underlay isis`
+  - IRB-A : `python nornir-push-config.py --action push --lab l2vpn --option irb-a --underlay ebgp`
+  - IRB-S : `python nornir-push-config.py --action push --lab l2vpn --option irb-s --underlay isis`
+  - IRB-S : `python nornir-push-config.py --action push --lab l2vpn --option irb-s --underlay ebgp`
+  - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a --underlay isis`
+  - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a --underlay ebgp`
