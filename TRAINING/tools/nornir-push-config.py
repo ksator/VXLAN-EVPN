@@ -53,7 +53,7 @@ if args.action == "push":
         else:
             print('ERROR : Bad underlay')
     elif args.lab == "l2vpn":
-        if args.underlay == "ebgp" or args.underlay == "ebgp":
+        if args.underlay == "ebgp" or args.underlay == "isis":
             if args.option == "l2" or args.option == "irb-a" or args.option == "irb-s":
                 config_name = args.underlay+"-"+args.option
                 result_leaf=leaf.run(task=device_merge_conf,configuration=config_name)
@@ -63,7 +63,7 @@ if args.action == "push":
         else:
             print('ERROR : Bad underlay')
     elif args.lab == "l3vpn":
-        if args.underlay == "ebgp" or args.underlay == "ebgp":
+        if args.underlay == "ebgp" or args.underlay == "isis":
             if args.option == "option-a":
                 result_leaf=leaf.run(task=device_merge_conf,configuration=config_name)
                 print_result(result_leaf)
