@@ -27,7 +27,7 @@ def device_replace_conf(task,configuration):
 parser = argparse.ArgumentParser()
 parser.add_argument("-action","--action",help="\'push\' or \'reset\' to initial configuration")
 parser.add_argument("-lab","--lab",help="\'infra\' or \'l2vpn\' or \'l3vpn\'")
-parser.add_argument("-underlay","--underlay",help="\'isis\' or \'ebgp\")
+parser.add_argument("-underlay","--underlay",help="\'isis\' or \'ebgp\'")
 parser.add_argument("-option","--option",help="\'l2\' or \'irb-a\' or \'irb-b\' for \'l2vpn\', \'option-a\' for l3vpn")
 args = parser.parse_args()
 
