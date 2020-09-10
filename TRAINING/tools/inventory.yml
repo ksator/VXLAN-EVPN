@@ -18,7 +18,7 @@ leaf1:
     ebgp-irb-a: "../day-2/solutions/IRB-A/eBGP/leaf1_ADC_day2_eBGP_IRB-A_solution.eos"
     ebgp-irb-s: "../day-2/solutions/IRB-S/eBGP/leaf1_ADC_day2_eBGP_IRB-S_solution.eos"
     ebgp-option-a: "../day-3/solutions/eBGP/leaf1_ADC_day3_eBGP_L3VPN_solution.eos"
-    ebgp-tshoot: "../day-2/initial_conf/initial_conf/EVPN_VXLAN_troubleshooting/leaf1.eos"
+    ebgp-tshoot: "../day-2/initial_conf/EVPN_VXLAN_troubleshooting/leaf1.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf1_ADC_day2_ISIS_L2VPN_solution.eos"
     isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf1_ADC_day2_ISIS_IRB-A_solution.eos"
     isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf1_ADC_day2_ISIS_IRB-S_solution.eos"
