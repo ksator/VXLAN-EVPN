@@ -81,17 +81,17 @@ nornir            2.4.0
 (venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python napalm-get-facts.py 
 ```
 
-## how to use ?
+## how to use?
 
 - Reset connectivity for leaf/spine/host: `python nornir-push-config.py --action reset`
   - WARNING : it supposes that the inital IP Connectivity has been saved for all devices (see lab guide day-1)
 
-- Push **EVPN infrastructure** :
+- Push **EVPN infrastructure** (solution):
 
   - ISIS use case : `python nornir-push-config.py --action push --lab infra --underlay isis`
   - eBGP use case : `python nornir-push-config.py --action push --lab infra --underlay ebgp`
 
-- Push a specific **EVPN use case** : **please use the righ underlay option based on your infrastructure**
+- Push a specific **EVPN use case** (solution): **please use the righ underlay option based on your infrastructure**
 
   - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2 --underlay isis`
   - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2 --underlay ebgp`
@@ -102,4 +102,6 @@ nornir            2.4.0
   - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a --underlay isis`
   - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a --underlay ebgp`
 
-- For the troublehoosting lab : `python nornir-push-config.py --action push --lab l2vpn --option tshoot --underlay ebgp`
+- For the troublehoosting lab in day-2, there is a specific process :
+  - Reset the lab to initial connectivity (should be localized in `flash:` as `init_conf_ADC.eos` - if not, please modify the code)
+  - Push the tshoot lab : `python nornir-push-config.py --action push --lab l2vpn --option tshoot --underlay ebgp`
