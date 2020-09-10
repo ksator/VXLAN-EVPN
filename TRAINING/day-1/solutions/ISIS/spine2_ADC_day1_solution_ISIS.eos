@@ -59,7 +59,6 @@ router bgp 65000
    maximum-paths 2 ecmp 2
    neighbor overlay-leaf-sessions peer group
    neighbor overlay-leaf-sessions update-source Loopback0
-   neighbor overlay-leaf-sessions ebgp-multihop 2
    neighbor overlay-leaf-sessions send-community extended
    neighbor overlay-leaf-sessions route-reflector-client
    neighbor overlay-leaf-sessions remote-as 65000

@@ -59,8 +59,7 @@ arista@devbox:~$ python -V
 Python 3.8.1
 ```
 
-- make sure that your ssh key is added to the repo
-- clone the repository (`git clone https://github.com/krikoon73/VXLAN-EVPN.git`)
+- clone the repository (https) (`git clone https://github.com/krikoon73/VXLAN-EVPN.git`)
 - create virtualenv in `tools` directory : 
   - `arista@devbox:~$ pip install virtualenv`
   - `arista@devbox:~$ cd VXLAN-EVPN/TRAINING/tools/`
@@ -76,7 +75,7 @@ netmiko           2.4.2
 nornir            2.4.0
 ```
 
-- test 
+- test
 
 ```
 (venv) arista@devbox:~/VXLAN-EVPN/TRAINING/tools$ python napalm-get-facts.py 
@@ -84,12 +83,16 @@ nornir            2.4.0
 
 ## how to use ?
 
-- Reset connectivity for leaf/spine/host: `python nornir-push-config.py --action reset` 
+- Reset connectivity for leaf/spine/host: `python nornir-push-config.py --action reset`
   - WARNING : it supposes that the inital IP Connectivity has been saved for all devices (see lab guide day-1)
-- Push EVPN infrastructure :
+
+- Push **EVPN infrastructure** :
+
   - ISIS use case : `python nornir-push-config.py --action push --lab infra --underlay isis`
   - eBGP use case : `python nornir-push-config.py --action push --lab infra --underlay ebgp`
-- Push a specific EVPN use case : please use the righ underlay option based on your infrastructure
+
+- Push a specific **EVPN use case** : **please use the righ underlay option based on your infrastructure**
+
   - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2 --underlay isis`
   - L2VPN : `python nornir-push-config.py --action push --lab l2vpn --option l2 --underlay ebgp`
   - IRB-A : `python nornir-push-config.py --action push --lab l2vpn --option irb-a --underlay isis`
@@ -98,3 +101,5 @@ nornir            2.4.0
   - IRB-S : `python nornir-push-config.py --action push --lab l2vpn --option irb-s --underlay ebgp`
   - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a --underlay isis`
   - L3VPN : `python nornir-push-config.py --action push --lab l3vpn --option option-a --underlay ebgp`
+
+- For the troublehoosting lab : `python nornir-push-config.py --action push --lab l2vpn --option tshoot --underlay ebgp`

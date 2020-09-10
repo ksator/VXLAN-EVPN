@@ -95,7 +95,6 @@ router bgp 65000
    neighbor overlay-leaf-sessions peer group
    neighbor overlay-leaf-sessions remote-as 65000
    neighbor overlay-leaf-sessions update-source Loopback0
-   neighbor overlay-leaf-sessions ebgp-multihop 2
    neighbor overlay-leaf-sessions send-community extended
    neighbor overlay-leaf-sessions maximum-routes 0
    neighbor 123.1.1.1 peer group overlay-leaf-sessions
