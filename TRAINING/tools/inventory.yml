@@ -110,6 +110,7 @@ spine1:
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/spine1_ADC_day1_solution_ISIS.eos"
     ebgp: "../day-1/solutions/eBGP/spine1_ADC_day1_solution_eBGP.eos"
+    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/spine1.eos"
 spine2:
   hostname: 192.168.0.11
   port: 443
@@ -125,6 +126,7 @@ spine2:
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/spine2_ADC_day1_solution_ISIS.eos"
     ebgp: "../day-1/solutions/eBGP/spine2_ADC_day1_solution_eBGP.eos"
+    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/spine2.eos"
 host1:
   hostname: 192.168.0.16
   port: 443
