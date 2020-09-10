@@ -18,7 +18,7 @@ leaf1:
     ebgp-irb-a: "../day-2/solutions/IRB-A/eBGP/leaf1_ADC_day2_eBGP_IRB-A_solution.eos"
     ebgp-irb-s: "../day-2/solutions/IRB-S/eBGP/leaf1_ADC_day2_eBGP_IRB-S_solution.eos"
     ebgp-option-a: "../day-3/solutions/eBGP/leaf1_ADC_day3_eBGP_L3VPN_solution.eos"
-    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/leaf1.eos"
+    ebgp-tshoot: "../day-2/initial_conf/initial_conf/EVPN_VXLAN_troubleshooting/leaf1.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf1_ADC_day2_ISIS_L2VPN_solution.eos"
     isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf1_ADC_day2_ISIS_IRB-A_solution.eos"
     isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf1_ADC_day2_ISIS_IRB-S_solution.eos"
@@ -41,7 +41,7 @@ leaf2:
     ebgp-l2: "../day-2/solutions/L2VPN/eBGP/leaf2_ADC_day2_eBGP_L2VPN_solution.eos"
     ebgp-irb-a: "../day-2/solutions/IRB-A/eBGP/leaf2_ADC_eBGP_day2_IRB-A_solution.eos"
     ebgp-irb-s: "../day-2/solutions/IRB-S/eBGP/leaf2_ADC_eBGP_day2_IRB-S_solution.eos"
-    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/leaf2.eos"
+    ebgp-tshoot: "../day-2/initial_conf/EVPN_VXLAN_troubleshooting/leaf2.eos"
     ebgp-option-a: "../day-3/solutions/eBGP/leaf2_ADC_day3_eBGP_L3VPN_solution.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf2_ADC_day2_ISIS_L2VPN_solution.eos"
     isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf2_ADC_day2_ISIS_IRB-A_solution.eos"
@@ -66,7 +66,7 @@ leaf3:
     ebgp-irb-a: "../day-2/solutions/IRB-A/eBGP/leaf3_ADC_day2_eBGP_IRB-A_solution.eos"
     ebgp-irb-s: "../day-2/solutions/IRB-S/eBGP/leaf3_ADC_day2_eBGP_IRB-S_solution.eos"
     ebgp-option-a: "../day-3/solutions/eBGP/leaf3_ADC_day3_eBGP_L3VPN_solution.eos"
-    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/leaf3.eos"
+    ebgp-tshoot: "../day-2/initial_conf/EVPN_VXLAN_troubleshooting/leaf3.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf3_ADC_day2_ISIS_L2VPN_solution.eos"
     isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf3_ADC_day2_ISIS_IRB-A_solution.eos"
     isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf3_ADC_day2_ISIS_IRB-S_solution.eos"
@@ -90,7 +90,7 @@ leaf4:
     ebgp-irb-a: "../day-2/solutions/IRB-A/eBGP/leaf4_ADC_day2_eBGP_IRB-A_solution.eos"
     ebgp-irb-s: "../day-2/solutions/IRB-S/eBGP/leaf4_ADC_day2_eBGP_IRB-S_solution.eos"
     ebgp-option-a: "../day-3/solutions/eBGP/leaf4_ADC_day3_eBGP_L3VPN_solution.eos"
-    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/leaf4.eos"
+    ebgp-tshoot: "../day-2/initial_conf/EVPN_VXLAN_troubleshooting/leaf4.eos"
     isis-l2: "../day-2/solutions/L2VPN/ISIS/leaf4_ADC_day2_ISIS_L2VPN_solution.eos"
     isis-irb-a: "../day-2/solutions/IRB-A/ISIS/leaf4_ADC_day2_ISIS_IRB-A_solution.eos"
     isis-irb-s: "../day-2/solutions/IRB-S/ISIS/leaf4_ADC_day2_ISIS_IRB-S_solution.eos"
@@ -110,7 +110,7 @@ spine1:
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/spine1_ADC_day1_solution_ISIS.eos"
     ebgp: "../day-1/solutions/eBGP/spine1_ADC_day1_solution_eBGP.eos"
-    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/spine1.eos"
+    ebgp-tshoot: "../day-2/initial_conf/EVPN_VXLAN_troubleshooting/spine1.eos"
 spine2:
   hostname: 192.168.0.11
   port: 443
@@ -126,7 +126,7 @@ spine2:
     init: "init_IP_connectivity.eos"
     isis: "../day-1/solutions/ISIS/spine2_ADC_day1_solution_ISIS.eos"
     ebgp: "../day-1/solutions/eBGP/spine2_ADC_day1_solution_eBGP.eos"
-    ebgp-tshoot: "../day-2/solutions/Troubleshooting_lab/spine2.eos"
+    ebgp-tshoot: "../day-2/initial_conf/EVPN_VXLAN_troubleshooting/spine2.eos"
 host1:
   hostname: 192.168.0.16
   port: 443
