@@ -58,8 +58,9 @@ if args.action == "push":
                 config_name = args.underlay+"-"+args.option
                 result_leaf=leaf.run(task=device_merge_conf,configuration=config_name)
                 print_result(result_leaf)
-                result_spine=spine.run(task=device_merge_conf,configuration=config_name)
-                print_result(result_spine)
+                if args.option == "tshoot":
+                    result_spine=spine.run(task=device_merge_conf,configuration=config_name)
+                    print_result(result_spine)
             else:
                 print(f"Lab {args.lab} with {args.option} is not yet implemented for {args.underlay} ")
         else:
