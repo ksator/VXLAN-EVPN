@@ -51,11 +51,6 @@ What would you like to do?:
 and select the option `1` (Reset All Devices to Base ATD) 
 - then ssh each device and copy and paste the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
 
-Option C:
-- open a shell session on the ATD jump host
-- run this command `python nornir-push-config.py --action reset` 
-- then ssh each device and copy and paste the configuration files located in the directory [EVPN_VXLAN_troubleshooting](/TRAINING/day-2/initial_conf/EVPN_VXLAN_troubleshooting)
-
 
 ## Run the following tests
 
