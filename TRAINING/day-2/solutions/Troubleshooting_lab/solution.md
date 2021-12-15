@@ -50,7 +50,7 @@ So there is no mac learning via evpn so it works only with flooding
  
 ```
 leaf3(config-macvrf-60)#sh active 
-router bgp 65001
+router bgp 65002
    vlan 60
       rd 123.1.1.3:60
       route-target both 60:60
@@ -76,7 +76,7 @@ leaf1(config-macvrf-60)#
 #### leaf 3/leaf 4 use 60:60  
 ```
 leaf3(config-macvrf-60)#sh active 
-router bgp 65001
+router bgp 65002
    vlan 60
       rd 123.1.1.5:60
       route-target both 60:60
